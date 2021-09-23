@@ -10,7 +10,7 @@ public class interPolinom {
 
         Matrix m = new Matrix(size, size + 1);
 
-        System.out.println("Masukkan titik (x, y): ");
+        System.out.println("\nMasukkan titik (x, y): ");
 
         for(int i = 0; i < size; i++){
             float val = 1;
@@ -24,11 +24,22 @@ public class interPolinom {
             m.set(i, size, y);
 
         }
-        System.out.println("Matriks augmented persamaan: ");
+        System.out.println("\nMatriks augmented persamaan: ");
         m.displayMatrix();
 
-        /* nanti di sini masukin SPL */
+        float array[] = SPLCramer.Cramer(m);
+        float approx = 0;
+        System.out.print("\nMasukkan nilai x yang akan diaproksimasi: ");
+        approx = sc.nextFloat();
+        float result = array[0];
 
+        for (int i = 1; i < size; i++){
+            result = result + approx * array[i];
+            approx = approx * approx;
+        }
+
+    
+        System.out.println(result);
         sc.close();
     }
 }
