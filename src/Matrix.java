@@ -76,7 +76,7 @@ public class Matrix {
                     if (v > 1) {
                         System.out.print("+ ");
                     }
-                    System.out.print((new DecimalFormat("#.##").format(e(i,j) + 0.0)) + "x"+j+" ");
+                    System.out.print((new DecimalFormat("#.##").format(e(i,j) + 0.0)) + "x"+ (j+1)+" ");
                 }
             }
             if (v > 0) {
