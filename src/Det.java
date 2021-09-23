@@ -1,4 +1,6 @@
 public class Det{
+
+    //n = ukuran matriks
     static float determinanKofaktor(Matrix m, int n){
         float det = 0;
         int rowCount = 0;
@@ -37,11 +39,40 @@ public class Det{
     }
  
 
-    public static void main(String [] args){
-        Matrix m = new Matrix(3, 3);
-        m.readMatrix();
-        m.displayMatrix();
-        System.out.println(determinanKofaktor(m, 3));
+    static float determinanGaussian(Matrix m, int n){
+        float det = 1;
+        float temp = 0;
+        int count;
+        for(int i = 0; i < n; i++){
+            
+            if (m.e(i, i) == 0){
+                count = 0;
+                while ((i + count < n) && m.e(i + count, i) == 0){
+                    count = count + 1;
+                }
+
+                for(int k = 0; k < n; k++){
+                    temp = m.e(i, k);
+                    m.set(i, k, m.e(i + count, k));
+                    m.set(i + count, k, temp);
+                }
+            }
+            
+            for(int j = 0; j < n; j++){
+                if(i != j){
+                    float comp = m.e(j, i) / m.e(i, i);
+                    for(int k = 0; k < n; k++){
+                        m.set(j, k, (m.e(j, k) - m.e(i, k) * comp));
+                    }
+                }
+            }
+            m.displayMatrix();
+        }
+        for(int i = 0; i < n; i++){
+            det = det * m.e(i, i);
+        }
+        return det;
+        //masih ada bug?
     }
 }
 
