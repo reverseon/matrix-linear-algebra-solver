@@ -29,6 +29,6 @@ public class interPolinom {
 
         /* nanti di sini masukin SPL */
 
-        
+        sc.close();
     }
 }
