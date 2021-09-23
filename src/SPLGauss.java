@@ -1,5 +1,6 @@
 public class SPLGauss {
-    public static void solve(Matrix m) {
+    public static int solve(Matrix m) {
+        /* RETURN 1 BILA KONSISTEN, RETURN 0 BILA INKONSISTEN. KONDISI MATRIX TELAH TERATLER! */
         int ldo = 0; /* Jumlah Leading One - 1*/
         int rz = 0; /* JUMLAH ROW ZERO DIBAWAH */
         for (int j = 0; j < m.COLS -1; j++) {
@@ -37,8 +38,7 @@ public class SPLGauss {
                     }
                     if (Float.compare(0, res) == 0) {
                         if (Float.compare(0, m.e(i, m.COLS-1)) != 0) {
-                            System.out.println("Sistem Inkonsisten");
-                            return;
+                            return 0;
                         }  
                         else {
                             m.swap(i, (m.ROWS-1)-rz);
@@ -49,6 +49,6 @@ public class SPLGauss {
                 ldo++;
             }
         }
-        m.displayAsEqn();
+        return 1;
     }
 }
