@@ -15,13 +15,13 @@ public class SPLGaussJordan {
             }
             if (!foundone) {
                 for (int i = ldo; i < m.ROWS; i++) {
-                    if (Float.compare(0, m.e(i, j)) != 0) {
+                    if (Float.compare(0, (m.e(i, j) + 0.0f)) != 0) {
                         m.swap(ldo, i);
                         break;
                     }
                 }
             }   
-            if (Float.compare(m.e(ldo, j), 0) == 0) {
+            if (Float.compare((m.e(ldo, j) + 0.0f), 0) == 0) {
                 continue; // KOLOM ITU NOL SEMUA
             } else {
                 float mult = 1/m.e(ldo, j);
@@ -39,8 +39,8 @@ public class SPLGaussJordan {
                         for (int jn = 0; jn < m.COLS-1; jn++) {
                             res += m.e(i, jn);
                         }
-                        if (Float.compare(0, res) == 0) {
-                            if (Float.compare(0, m.e(i, m.COLS-1)) != 0) {
+                        if (Float.compare(0, (res + 0.0f)) == 0) {
+                            if (Float.compare(0, (m.e(i, m.COLS-1) +0.0f)) != 0) {
                                 return 0; /* INKONSISTEN */
                             }  
                             else {
