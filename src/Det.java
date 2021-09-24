@@ -69,14 +69,6 @@ public class Det{
         }
         return det;
     }
-
-    public static void main(String[] args){
-        Matrix m = new Matrix(3, 3);
-        m.readMatrix();
-        System.out.println(determinanKofaktor(m));
-        System.out.println(determinanGaussian(m));
-        
-    }
 }
 
 
