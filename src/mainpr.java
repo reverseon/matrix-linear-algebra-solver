@@ -82,7 +82,7 @@ public class mainpr {
 
     public static void debug(Scanner sc) {
         Matrix m1 = new Matrix(2, 4);
-        m1.readMatrix();
+        m1.readMatrix(sc);
         m1.set(1, 3, 12);
         m1.displayMatrix();
         System.out.println("");
