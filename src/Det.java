@@ -10,7 +10,7 @@ public class Det{
         } else {
             det = 0;
             for(int i = 0; i < m.ROWS ; i++){
-                if(m.e(0, 1) != 0){
+                if(m.e(0, i) != 0){
                     rowCount = 0;
                     for(int j = 0; j < m.ROWS ; j++){
                         colCount = 0;
