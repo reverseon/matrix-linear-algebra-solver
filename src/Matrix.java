@@ -17,14 +17,12 @@ public class Matrix {
     public float e(int row, int col) {
         return this.CONTENT[row][col];
     }
-    public void readMatrix() {
-        Scanner sc = new Scanner(System.in);
+    public void readMatrix(Scanner sc) {
         for (int i = 0; i < this.ROWS; i++) {
             for (int j = 0; j < this.COLS; j++) {
                 this.CONTENT[i][j] = sc.nextFloat();
             }
         }
-        sc.close();
     }
     public void displayMatrix() {
         for (int i = 0; i < this.ROWS; i++) {
