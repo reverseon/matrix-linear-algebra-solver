@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class InterpolasiPolinom {
-    public static void main(String[] args){
+    public static void intPol(){
         int size = 0;
 
         Scanner sc = new Scanner(System.in);
