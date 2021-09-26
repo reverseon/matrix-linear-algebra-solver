@@ -4,14 +4,13 @@ public class mainpr {
     // TODO: Corner cases. Handling more than one action.
     public static void main(String[] args) {
         int input, exitcode;
-        Matrix m = new Matrix(100, 100);
+        Matrix m = new Matrix(5, 5);
         exitcode = 0;
-        Scanner sc = new Scanner(System.in);
-
         while (exitcode == 0) {
             mainMenu();
+            Scanner sc = new Scanner(System.in);
             input = -1;
-            input(sc, input, 0, 6);
+            input = input(sc, input, 0, 6);
             switch (input) {
                 case 1:
                     System.out.println("1 Selected.");
@@ -43,7 +42,6 @@ public class mainpr {
             }
         }
         if (exitcode == 1) {
-            sc.close();
             System.exit(69);
         }
     }
@@ -63,20 +61,22 @@ public class mainpr {
         System.out.println("\nSISTEM PERSAMAAN LINIER \n[1] Metode eliminasi Gauss\n[2] Metode eliminasi Gauss-Jordan");
         System.out.println("[3] Metode matriks balikan\n[4] Kaidah Cramer\n[5] Kembali");
         System.out.println("Masukkan pilihan menu (1/2/3/4/5) : ");
-        input(sc, input, 1, 5);
+        input = input(sc, input, 1, 5);
 
         switch (input) {
             case 1:
                 System.out.println("1 Selected.");
                 System.out.println("Masukkan pilihan input [1] keyboard | [2] file .txt (1/2) : ");
-                input(sc, ipt1, 1, 2);
+                ipt1 = input(sc, ipt1, 1, 2);
                 switch (ipt1) {
                     case 1:
                         m.ROWS = sc.nextInt();
                         m.COLS = sc.nextInt();
                         m.readMatrix(sc);
+                        break;
                     case 2:
-                        ReadText.readtxt(m);
+                        ReadText.readtxt(m, sc);
+                        break;
                 }
                 result = SPLGauss.solve(m);
                 System.out.println("Hasil perhitungan menggunakan metode eliminasi Gauss: ");
@@ -85,14 +85,16 @@ public class mainpr {
             case 2:
                 System.out.println("2 Selected.");
                 System.out.println("Masukkan pilihan input [1] keyboard | [2] file .txt (1/2) : ");
-                input(sc, ipt1, 1, 2);
+                ipt1 = input(sc, ipt1, 1, 2);
                 switch (ipt1) {
                     case 1:
                         m.ROWS = sc.nextInt();
                         m.COLS = sc.nextInt();
                         m.readMatrix(sc);
+                        break;
                     case 2:
-                        ReadText.readtxt(m);
+                        ReadText.readtxt(m, sc);
+                        break;
                 }
                 result = SPLGaussJordan.solve(m);
                 System.out.println("Hasil perhitungan menggunakan metode eliminasi Gauss: ");
@@ -101,14 +103,16 @@ public class mainpr {
             case 3:
                 System.out.println("3 Selected.");
                 System.out.println("Masukkan pilihan input [1] keyboard | [2] file .txt (1/2) : ");
-                input(sc, ipt1, 1, 2);
+                ipt1 = input(sc, ipt1, 1, 2);
                 switch (ipt1) {
                     case 1:
                         m.ROWS = sc.nextInt();
                         m.COLS = sc.nextInt();
                         m.readMatrix(sc);
+                        break;
                     case 2:
-                        ReadText.readtxt(m);
+                        ReadText.readtxt(m, sc);
+                        break;
                 }
                 result = 0;
                 System.out.println("Hasil perhitungan menggunakan metode eliminasi Gauss: ");
@@ -117,14 +121,16 @@ public class mainpr {
             case 4:
                 System.out.println("4 Selected.");
                 System.out.println("Masukkan pilihan input [1] keyboard | [2] file .txt (1/2) : ");
-                input(sc, ipt1, 1, 2);
+                ipt1 = input(sc, ipt1, 1, 2);
                 switch (ipt1) {
                     case 1:
                         m.ROWS = sc.nextInt();
                         m.COLS = sc.nextInt();
                         m.readMatrix(sc);
+                        break;
                     case 2:
-                        ReadText.readtxt(m);
+                        ReadText.readtxt(m, sc);
+                        break;
                 }
                 result = 0;
                 System.out.println("Hasil perhitungan menggunakan metode eliminasi Gauss: ");
@@ -140,14 +146,16 @@ public class mainpr {
         int input = 0;
         System.out.println("\nDETERMINAN");
         System.out.println("Masukkan pilihan input [1] keyboard | [2] file .txt (1/2) : ");
-        input(sc, input, 1, 2);
+        input = input(sc, input, 1, 2);
         switch (input) {
             case 1:
                 m.ROWS = sc.nextInt();
                 m.COLS = m.ROWS;
                 m.readMatrix(sc);
+                break;
             case 2:
-                ReadText.readtxt(m);
+                ReadText.readtxt(m, sc);
+                break;
         }
         System.out.println("Determinan dengan ekspansi kofaktor adalah " + Det.determinanKofaktor(m));
         System.out.println("Determinan dengan reduksi baris adalah " + Det.determinanGaussian(m));
@@ -158,15 +166,17 @@ public class mainpr {
         int input = 0;
         System.out.println("\nMATRIKS BALIKAN");
         System.out.println("Masukkan pilihan input [1] keyboard | [2] file .txt (1/2) : ");
-        input(sc, input, 1, 2);
+        input = input(sc, input, 1, 2);
         switch (input) {
             case 1:
                 System.out.print("Jumlah Titik: ");
                 m.ROWS = sc.nextInt();
                 m.COLS = m.ROWS;
                 m.readMatrix(sc);
+                break;
             case 2:
-                ReadText.readtxt(m);
+                ReadText.readtxt(m, sc);
+                break;
         }
     }
 
@@ -174,15 +184,17 @@ public class mainpr {
         int input = 0;
         System.out.println("\n REGRESI LINIER BERGANDA");
         System.out.println("Masukkan pilihan input [1] keyboard | [2] file .txt (1/2) : ");
-        input(sc, input, 1, 2);
+        input = input(sc, input, 1, 2);
         switch (input) {
             case 1:
                 System.out.print("Jumlah Titik: ");
                 m.ROWS = sc.nextInt();
                 m.COLS = m.ROWS;
                 m.readMatrix(sc);
+                break;
             case 2:
-                ReadText.readtxt(m);
+                ReadText.readtxt(m, sc);
+                break;
         }
         DoubleLinReg.solve(m, sc);
     }
@@ -195,9 +207,10 @@ public class mainpr {
         System.out.println("");
     }
 
-    public static void input(Scanner sc, int ipt, int fOpt, int lOpt) {
+    public static int input(Scanner sc, int ipt, int fOpt, int lOpt) {
         do {
             ipt = sc.nextInt();
         } while (ipt < fOpt || ipt > lOpt);
+        return ipt;
     }
 }
