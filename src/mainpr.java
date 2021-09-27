@@ -75,7 +75,7 @@ public class mainpr {
                         m.readMatrix(sc);
                         break;
                     case 2:
-                        ReadText.readtxt(m, sc);
+                        ReadWriteText.readtxt(m, sc);
                         break;
                 }
                 result = SPLGauss.solve(m);
@@ -93,7 +93,7 @@ public class mainpr {
                         m.readMatrix(sc);
                         break;
                     case 2:
-                        ReadText.readtxt(m, sc);
+                        ReadWriteText.readtxt(m, sc);
                         break;
                 }
                 result = SPLGaussJordan.solve(m);
@@ -111,7 +111,7 @@ public class mainpr {
                         m.readMatrix(sc);
                         break;
                     case 2:
-                        ReadText.readtxt(m, sc);
+                        ReadWriteText.readtxt(m, sc);
                         break;
                 }
                 result = 0;
@@ -129,7 +129,7 @@ public class mainpr {
                         m.readMatrix(sc);
                         break;
                     case 2:
-                        ReadText.readtxt(m, sc);
+                        ReadWriteText.readtxt(m, sc);
                         break;
                 }
                 result = 0;
@@ -154,7 +154,7 @@ public class mainpr {
                 m.readMatrix(sc);
                 break;
             case 2:
-                ReadText.readtxt(m, sc);
+                ReadWriteText.readtxt(m, sc);
                 break;
         }
         System.out.println("Determinan dengan ekspansi kofaktor adalah " + Det.determinanKofaktor(m));
@@ -175,7 +175,7 @@ public class mainpr {
                 m.readMatrix(sc);
                 break;
             case 2:
-                ReadText.readtxt(m, sc);
+                ReadWriteText.readtxt(m, sc);
                 break;
         }
     }
@@ -193,7 +193,7 @@ public class mainpr {
                 m.readMatrix(sc);
                 break;
             case 2:
-                ReadText.readtxt(m, sc);
+                ReadWriteText.readtxt(m, sc);
                 break;
         }
         DoubleLinReg.solve(m, sc);
