@@ -1,8 +1,10 @@
 import java.io.File;
+import java.io.FileWriter;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class ReadText {
+
+public class ReadWriteText {
     public static void readtxt(Matrix m, Scanner sc) {
         String fileName;
         fileName = sc.nextLine();
@@ -41,3 +43,4 @@ public class ReadText {
         }
     }
 }
+
