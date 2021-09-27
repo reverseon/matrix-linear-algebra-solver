@@ -3,13 +3,14 @@ import java.io.FileWriter;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-
 public class ReadWriteText {
     public static void readtxt(Matrix m, Scanner sc) {
         String fileName;
         fileName = sc.nextLine();
-        System.out.println("Masukkan nama file (<namafile>.txt): ");
-        fileName = sc.nextLine();
+        do {
+            System.out.println("Masukkan nama file (<namafile>.txt): ");
+            fileName = sc.nextLine();
+        } while (fileName == "");
         System.out.println("File name selected: " + fileName);
         try {
 
@@ -42,5 +43,32 @@ public class ReadWriteText {
             // e.printStackTrace();
         }
     }
-}
 
+    public static void writetxt(String str, Scanner sc) {
+        String fileOut;
+        do {
+            System.out.println("Masukkan nama file output (<namafile>.txt): ");
+            fileOut = sc.nextLine();
+        } while (fileOut == "");
+        try {
+            System.out.println("File name selected: " + fileOut);
+            File currDir = new File("..");
+            File txt = new File(currDir, "test\\" + fileOut);
+            FileWriter txtout = new FileWriter(txt);
+            txtout.write(str);
+            txtout.close();
+            System.out.println("File writing done.");
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) {
+        String str = "a";
+        Scanner sc = new Scanner(System.in);
+        writetxt(str, sc);
+        str = "b";
+        writetxt(str, sc);
+    }
+}

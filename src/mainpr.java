@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class mainpr {
     // TODO: Corner cases. Handling more than one action.
+    // TODO: ReadWriteText.writetxt implementations to all options. my head died.
     public static void main(String[] args) {
         int input, exitcode;
         Matrix m = new Matrix(5, 5);
@@ -144,6 +145,8 @@ public class mainpr {
 
     public static void detMenu(Scanner sc, Matrix m) {
         int input = 0;
+        String iptstr;
+        float resKofaktor, resGauss;
         System.out.println("\nDETERMINAN");
         System.out.println("Masukkan pilihan input [1] keyboard | [2] file .txt (1/2) : ");
         input = input(sc, input, 1, 2);
@@ -157,8 +160,19 @@ public class mainpr {
                 ReadWriteText.readtxt(m, sc);
                 break;
         }
-        System.out.println("Determinan dengan ekspansi kofaktor adalah " + Det.determinanKofaktor(m));
-        System.out.println("Determinan dengan reduksi baris adalah " + Det.determinanGaussian(m));
+        resKofaktor = Det.determinanKofaktor(m);
+        resGauss = Det.determinanGaussian(m);
+        System.out.println("Determinan dengan ekspansi kofaktor adalah " + resKofaktor);
+        System.out.println("Determinan dengan reduksi baris adalah " + resGauss);
+        do {
+            System.out.println("Tulis hasil dalam file .txt? [y/n] : ");
+            iptstr = sc.nextLine();
+        } while (!iptstr.equals("y") && !iptstr.equals("Y") && !iptstr.equals("n") && !iptstr.equals("N"));
+        if (iptstr.equals("y") || iptstr.equals("Y")) {
+            ReadWriteText.writetxt("Determinan dengan ekspansi kofaktor adalah " + resKofaktor + "\nDeterminan dengan ekspansi kofaktor adalah " + resGauss + "\n", sc);
+        } else {
+            System.out.println("Hasil tidak ditulis");
+        }
     }
 
     // TODO: Implementasi matBalik() (Matriks Balikan)
