@@ -7,17 +7,17 @@ public class InterpolasiPolinom {
         System.out.print("Masukkan banyaknya pasangan titik: ");
         size = sc.nextInt();
 
-        Matrix m = new Matrix(size, size + 1);
+        MatrixDouble m = new MatrixDouble(size, size + 1);
 
         System.out.println("\nMasukkan titik (x, y): ");
 
         for(int i = 0; i < size; i++){
-            float val = 1;
-            float x = sc.nextFloat();
-            float y = sc.nextFloat();
+            double val = 1;
+            double x = sc.nextDouble();
+            double y = sc.nextDouble();
 
             for(int j = 0; j < size; j++){
-                m.set(i, j, val);
+                m.set(i, j, ((double) (Math.round(val * 100.0) / 100.0)));
                 val = val * x;
             }
             m.set(i, size, y);
@@ -25,13 +25,17 @@ public class InterpolasiPolinom {
         }
         System.out.println("\nMatriks augmented persamaan: ");
         m.displayMatrix();
-        System.out.println("\nDitemukan nilai konstanta menggunakan SPL Cramer: ");
 
-        float array[] = SPLCramer.Cramer(m);
-        float approx = 0;
+        SGJDouble.solve(m);
+        m.displayAsEqn();
+        
+        
+        double array[] = new double[10];
+        
 
         System.out.print("\nPersamaan polinom: ");
         for(int i = 0; i < size; i++){
+            array[i] = m.e(i, size);
             System.out.printf("%f", array[i]);
             if(i != 0){
                 System.out.printf("x^%d", i);
@@ -45,23 +49,27 @@ public class InterpolasiPolinom {
             }
             
         }
-
+        double approx;
         System.out.print("\nMasukkan nilai x yang akan diaproksimasi (input -999 untuk keluar): ");
-        approx = sc.nextFloat();
+        approx = sc.nextDouble();
 
         while (approx != -999){
-            
-            float result = array[0];
-            float tempApprox = approx;
+            double result = array[0];
+            System.out.println(result);
             for (int i = 1; i < size; i++){
-                result = result + tempApprox * array[i];
-                tempApprox = tempApprox * approx;
+                result = result + (Math.pow(approx, i) * array[i]);
             }
             System.out.printf("Aproksimasi nilai %f terhadap interpolasi polinom: ", approx);
             System.out.println(result);
 
             System.out.print("\nMasukkan nilai x yang akan diaproksimasi (input -999 untuk keluar): ");
-            approx = sc.nextFloat();
+            approx = sc.nextDouble();
         }
+        
+    }
+
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        intPol(sc);
     }
 }
