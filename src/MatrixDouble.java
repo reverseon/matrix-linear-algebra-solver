@@ -74,18 +74,21 @@ public class MatrixDouble {
             for (int j = 0; j < this.COLS-1; j++) {
                 if (MatrixDouble.format(e(i,j)).equals("1.00")) {
                     ldo = j;
+                    anyprint = true;
                     System.out.print("x" + (j + 1) + " = ");
                     break;
                 }
             }
+            boolean oz = false;
             for (int j = this.COLS-1; j > ldo; j--) {
                 if (j == this.COLS-1) {
                     if (format(e(i,j)).equals("0.00")) {
-                        continue;
+                        oz = true;
                     } else {
                         anyprint = true;
-                        fRight = false;
+                        oz = false;
                         System.out.print(format(e(i,j)) + " ");
+                        fRight = false;
                     }
                 } else {
                     if (Double.compare(-1*(e(i,j)), 0) < 0) {
@@ -95,8 +98,9 @@ public class MatrixDouble {
                         } else
                         if (incheck.equals("1.00")) {
                             anyprint = true;
-                            fRight = false;
+                            oz = false;
                             System.out.print((fRight ? "" : "- ") + "t");
+                            fRight = false;
                             if (a[j] == 0) {
                                 ctr++;
                                 a[j] = ctr;
@@ -104,8 +108,9 @@ public class MatrixDouble {
                             System.out.print(a[j] + " ");
                         } else {
                             anyprint = true;
-                            fRight = false;
+                            oz = false;
                             System.out.print((fRight ? "" : "- ") + incheck + "t");
+                            fRight = false;
                             if (a[j] == 0) {
                                 ctr++;
                                 a[j] = ctr;
@@ -120,8 +125,9 @@ public class MatrixDouble {
                         } else
                         if (incheck.equals("1.00")) {
                             anyprint = true;
-                            fRight = false;
+                            oz = false;
                             System.out.print((fRight ? "" : "+ ") + "t");
+                            fRight = false;
                             if (a[j] == 0) {
                                 ctr++;
                                 a[j] = ctr;
@@ -129,8 +135,9 @@ public class MatrixDouble {
                             System.out.print(a[j] + " ");
                         } else {
                             anyprint = true;
-                            fRight = false;
+                            oz = false;
                             System.out.print((fRight ? "" : "+ ") + incheck + "t");
+                            fRight = false;
                             if (a[j] == 0) {
                                 ctr++;
                                 a[j] = ctr;
@@ -139,6 +146,9 @@ public class MatrixDouble {
                         }
                     }
                 }
+            }
+            if (oz == true) {
+                System.out.print("0.00");
             }
             if (anyprint) {
                 System.out.println();

@@ -35,11 +35,13 @@ public class SGJDouble {
                 /* CARI BARIS NOL SEMUA SETELAH LDO */ 
                 for (int i = m.ROWS-1-rz; i >= 0; i--) {
                     if (i != ldo) {
-                        double res = 0;
+                        boolean hasnonzero = false;
                         for (int jn = 0; jn < m.COLS-1; jn++) {
-                            res += m.e(i, jn);
+                            if (Double.compare(0, m.e(i, jn)) != 0) {
+                                hasnonzero = true;
+                            }
                         }
-                        if (Double.compare(0, (res + 0.0f)) == 0) {
+                        if (!hasnonzero) {
                             if (Double.compare(0, (m.e(i, m.COLS-1) +0.0f)) != 0) {
                                 return 0; /* INKONSISTEN */
                             }  

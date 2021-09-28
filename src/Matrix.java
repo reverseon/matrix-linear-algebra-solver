@@ -75,18 +75,21 @@ public class Matrix {
             for (int j = 0; j < this.COLS-1; j++) {
                 if (format(e(i,j)).equals("1.00")) {
                     ldo = j;
+                    anyprint = true;
                     System.out.print("x" + (j + 1) + " = ");
                     break;
                 }
             }
+            boolean oz = false;
             for (int j = this.COLS-1; j > ldo; j--) {
                 if (j == this.COLS-1) {
                     if (format(e(i,j)).equals("0.00")) {
-                        continue;
+                        oz = true;
                     } else {
                         anyprint = true;
-                        fRight = false;
+                        oz = false;
                         System.out.print(format(e(i,j)) + " ");
+                        fRight = false;
                     }
                 } else {
                     if (Float.compare(-1*(e(i,j)), 0) < 0) {
@@ -95,9 +98,10 @@ public class Matrix {
                             continue;
                         } else
                         if (incheck.equals("1.00")) {
+                            oz = false;
                             anyprint = true;
-                            fRight = false;
                             System.out.print((fRight ? "" : "- ") + "t");
+                            fRight = false;
                             if (a[j] == 0) {
                                 ctr++;
                                 a[j] = ctr;
@@ -105,8 +109,9 @@ public class Matrix {
                             System.out.print(a[j] + " ");
                         } else {
                             anyprint = true;
-                            fRight = false;
+                            oz = false;
                             System.out.print((fRight ? "" : "- ") + incheck + "t");
+                            fRight = false;
                             if (a[j] == 0) {
                                 ctr++;
                                 a[j] = ctr;
@@ -121,8 +126,9 @@ public class Matrix {
                         } else
                         if (incheck.equals("1.00")) {
                             anyprint = true;
-                            fRight = false;
+                            oz = false;
                             System.out.print((fRight ? "" : "+ ") + "t");
+                            fRight = false;
                             if (a[j] == 0) {
                                 ctr++;
                                 a[j] = ctr;
@@ -130,8 +136,9 @@ public class Matrix {
                             System.out.print(a[j] + " ");
                         } else {
                             anyprint = true;
-                            fRight = false;
+                            oz = false;
                             System.out.print((fRight ? "" : "+ ") + incheck + "t");
+                            fRight = false;
                             if (a[j] == 0) {
                                 ctr++;
                                 a[j] = ctr;
@@ -140,6 +147,9 @@ public class Matrix {
                         }
                     }
                 }
+            }
+            if (oz) {
+                System.out.print("0 ");
             }
             if (anyprint) {
                 System.out.println();
