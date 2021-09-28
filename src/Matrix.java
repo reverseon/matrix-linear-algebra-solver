@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.text.DecimalFormat;
+import java.math.RoundingMode;
 
 public class Matrix {
     float CONTENT[][];
@@ -10,6 +11,13 @@ public class Matrix {
         this.ROWS = row;
         this.COLS = col;
         this.CONTENT = new float[row][col];
+    }
+    public static String format(float number) {
+        DecimalFormat df = new DecimalFormat("#,##0.00");
+        df.setRoundingMode(RoundingMode.HALF_UP);
+        String formattedValue = df.format(number);
+        formattedValue = formattedValue.replaceAll("^-(?=0(\\.00*)?$)", "");
+        return formattedValue;
     }
     public void set(int row, int col, float val) {
         this.CONTENT[row][col] = val;
@@ -27,7 +35,7 @@ public class Matrix {
     public void displayMatrix() {
         for (int i = 0; i < this.ROWS; i++) {
             for (int j = 0; j < this.COLS; j++) {
-                System.out.print((new DecimalFormat("#.##").format(e(i,j) + 0.0)) + " ");
+                System.out.print((format(e(i,j)))+ " ");
             }
             System.out.println();
         }
@@ -58,12 +66,12 @@ public class Matrix {
             int v = 0;
             for (int j = 0; j < this.COLS; j++) {
                 if (j == this.COLS-1 && v > 0) {
-                    System.out.print("= " + (new DecimalFormat("#.##").format(e(i,j) + 0.0)));
+                    System.out.print("= " + (format(e(i,j) + 0.0f)));
                 } else
-                if ((new DecimalFormat("#.##").format(e(i,j) + 0.0)).equals("0")) {
+                if ((format(e(i,j))).equals("0.00")) {
                     continue;
                 } else
-                if ((new DecimalFormat("#.##").format(e(i,j) + 0.0)).equals("1")) {
+                if ((format(e(i,j))).equals("1.00")) {
                     v++;
                     if (v > 1) {
                         System.out.print("+ ");
@@ -74,7 +82,7 @@ public class Matrix {
                     if (v > 1) {
                         System.out.print("+ ");
                     }
-                    System.out.print((new DecimalFormat("#.##").format(e(i,j) + 0.0)) + "x"+ (j+1)+" ");
+                    System.out.print((format(e(i,j))) + "x"+ (j+1)+" ");
                 }
             }
             if (v > 0) {

@@ -1,3 +1,4 @@
+
 public class Det{
     public static float determinanKofaktor(Matrix m){
         float det = 0;
@@ -35,43 +36,69 @@ public class Det{
             }
         }
         return det;
+        
     }
  
 
     public static float determinanGaussian(Matrix m){
         float det = 1;
-        int count;
+        int count = 0;
+        int limit = 0;
+        int swapCount = 0;
         if (m.ROWS == 2){
             return (m.e(0, 0) * m.e(1, 1) - m.e(1, 0) * m.e(0, 1)); 
         } else if (m.ROWS == 1){
             return m.e(0, 0);
         } else {
+            swapCount = 0;
             for(int i = 0; i < m.ROWS ; i++){
-            
                 if (m.e(i, i) == 0){
-                    count = 0;
-                    while ((i + count < m.ROWS ) && m.e(i + count, i) == 0){
-                        count = count + 1;
+                    limit = 1;
+                    while ((i + limit) < m.ROWS && m.e(i + limit, i) == 0){
+                        limit++;
                     }
-    
-                    for(int k = 0; k < m.ROWS ; k++){
-                        m.swap(i, k);
+                    if (i + limit > i){
+                        m.swap(i, i + limit);
+                        swapCount++;
+                    }
+                    
+                }
+                
+                if (det != 0){
+                    for(int j = 0; j < m.ROWS ; j++){
+                        if(i != j){
+                            float comp = m.e(j, i) / m.e(i, i);
+                            for(int k = 0; k < m.ROWS ; k++){
+                                m.set(j, k, (m.e(j, k) - m.e(i, k) * comp));
+                            }
+                        }
+                    }
+
+                    for(int k = 0; k < m.ROWS; k++){
+                        count = 0;
+                        for(int l = 0; l < m.ROWS; l++){
+                            if(m.e(k, l) == 0){
+                                count++;
+                            }
+                        }
+                        if (count == m.ROWS){
+                            det = 0;
+                        }
+        
                     }
                 }
                 
-                for(int j = 0; j < m.ROWS ; j++){
-                    if(i != j){
-                        float comp = m.e(j, i) / m.e(i, i);
-                        for(int k = 0; k < m.ROWS ; k++){
-                            m.set(j, k, (m.e(j, k) - m.e(i, k) * comp));
-                        }
-                    }
+            }
+            if(det != 0){
+                for(int i = 0; i < m.ROWS ; i++){
+                    det = det * m.e(i, i);
                 }
-                m.displayMatrix();
             }
-            for(int i = 0; i < m.ROWS ; i++){
-                det = det * m.e(i, i);
+
+            if (swapCount % 2 != 0){
+                det = -det;
             }
+
             return det;
         }
     } 
