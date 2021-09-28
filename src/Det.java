@@ -1,3 +1,4 @@
+import java.util.Scanner;
 
 public class Det{
     public static float determinanKofaktor(Matrix m){
@@ -57,7 +58,7 @@ public class Det{
                     while ((i + limit) < m.ROWS && m.e(i + limit, i) == 0){
                         limit++;
                     }
-                    if (i + limit > i){
+                    if (i + limit > i && i + limit < m.ROWS){
                         m.swap(i, i + limit);
                         swapCount++;
                     }
@@ -73,6 +74,7 @@ public class Det{
                             }
                         }
                     }
+
 
                     for(int k = 0; k < m.ROWS; k++){
                         count = 0;
