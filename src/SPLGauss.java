@@ -49,8 +49,6 @@ public class SPLGauss {
                 ldo++;
             }
         }
-        System.out.println();
-        m.displayMatrix();
         int ldoidx = -1;
         for (int i = m.ROWS-1; i >= 0; i--) {
             ldoidx = -1;
@@ -69,8 +67,6 @@ public class SPLGauss {
                 }
             }
         }
-        System.out.println();
-        m.displayMatrix();
         return 1;
     }
 }
