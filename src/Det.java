@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 public class Det{
     public static float determinanKofaktor(Matrix m){
         float det = 0;

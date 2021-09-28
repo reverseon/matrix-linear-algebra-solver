@@ -1,10 +1,9 @@
 import java.util.Scanner;
 
 public class InterpolasiPolinom {
-    public static void intPol(){
+    public static void intPol(Scanner sc){
         int size = 0;
 
-        Scanner sc = new Scanner(System.in);
         System.out.print("Masukkan banyaknya pasangan titik: ");
         size = sc.nextInt();
 
@@ -64,9 +63,5 @@ public class InterpolasiPolinom {
             System.out.print("\nMasukkan nilai x yang akan diaproksimasi (input -999 untuk keluar): ");
             approx = sc.nextFloat();
         }
-        
-
-        
-        sc.close();
     }
 }

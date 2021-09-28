@@ -27,7 +27,7 @@ public class mainpr {
                     break;
                 case 4:
                     System.out.println("4 Selected.");
-                    InterpolasiPolinom.intPol();
+                    InterpolasiPolinom.intPol(sc);
                     break;
                 case 5:
                     System.out.println("5 Selected.");
