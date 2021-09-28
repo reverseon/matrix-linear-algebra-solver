@@ -54,14 +54,30 @@ public class ReadWriteText {
             System.out.println("File name selected: " + fileOut);
             File currDir = new File("..");
             File txt = new File(currDir, "test\\" + fileOut);
-            FileWriter txtout = new FileWriter(txt);
+            FileWriter txtout = new FileWriter(txt, true);
             txtout.write(str);
             txtout.close();
             System.out.println("File writing done.");
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static String matrixToStr(Matrix m) {
+        String matStr = "";
+        int i, j;
+        for (i = 0; i < m.ROWS; i++) {
+            for (j = 0; j < m.COLS; j++) {
+                matStr = matStr.concat(Float.toString(m.e(i, j)));
+                if (j != m.COLS - 1) {
+                    matStr = matStr.concat(" ");
+                } else {
+                    matStr = matStr.concat("\n");
+                }
+            }
+        }
+        return matStr;
     }
 
     public static void main(String[] args) {

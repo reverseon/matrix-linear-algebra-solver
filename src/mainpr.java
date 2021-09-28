@@ -98,7 +98,7 @@ public class mainpr {
                         break;
                 }
                 result = SPLGaussJordan.solve(m);
-                System.out.println("Hasil perhitungan menggunakan metode eliminasi Gauss: ");
+                System.out.println("Hasil perhitungan menggunakan metode eliminasi Gauss-Jordan: ");
                 System.out.println(result);
                 break;
             case 3:
@@ -116,7 +116,7 @@ public class mainpr {
                         break;
                 }
                 result = 0;
-                System.out.println("Hasil perhitungan menggunakan metode eliminasi Gauss: ");
+                System.out.println("Hasil perhitungan menggunakan metode Matriks balikan: ");
                 System.out.println(result);
                 break;
             case 4:
@@ -134,7 +134,7 @@ public class mainpr {
                         break;
                 }
                 result = 0;
-                System.out.println("Hasil perhitungan menggunakan metode eliminasi Gauss: ");
+                System.out.println("Hasil perhitungan menggunakan kaidah Crammer: ");
                 System.out.println(result);
                 break;
             case 5:
@@ -177,19 +177,63 @@ public class mainpr {
 
     // TODO: Implementasi matBalik() (Matriks Balikan)
     public static void matBalik(Scanner sc, Matrix m) {
-        int input = 0;
+        int input = 0, sta = 0;
+        String iptstr = "";
         System.out.println("\nMATRIKS BALIKAN");
         System.out.println("Masukkan pilihan input [1] keyboard | [2] file .txt (1/2) : ");
         input = input(sc, input, 1, 2);
         switch (input) {
             case 1:
-                System.out.print("Jumlah Titik: ");
+                System.out.print("Panjang baris dan kolom: ");
                 m.ROWS = sc.nextInt();
                 m.COLS = m.ROWS;
                 m.readMatrix(sc);
                 break;
             case 2:
                 ReadWriteText.readtxt(m, sc);
+                break;
+        }
+        input = 0;
+        System.out.println("Masukkan pilihan penyelesaian solusi menggunakan [1] OBE | [2] Kofaktor (1/2) : ");
+        input = input(sc, input, 1, 2);
+        switch (input) {
+            case 1:
+                sta = InverseOBE.solve(m);
+                if (sta == 0) {
+                    System.out.println("Matriks inkonsisten.");
+                } else {
+                    System.out.println("Matriks balikan menggunakan OBE: ");
+                    m.displayMatrix();
+                    do {
+                        System.out.println("Tulis hasil dalam file .txt? [y/n] : ");
+                        iptstr = sc.nextLine();
+                        iptstr = sc.nextLine();
+                    } while (!iptstr.equals("y") && !iptstr.equals("Y") && !iptstr.equals("n") && !iptstr.equals("N"));
+                    if (iptstr.equals("y") || iptstr.equals("Y")) {
+                        ReadWriteText.writetxt("Matriks Balikan dari m menggunakan OBE: \n" + ReadWriteText.matrixToStr(m), sc);
+                    } else {
+                        System.out.println("Hasil tidak ditulis");
+                    }
+                }
+                break;
+            case 2:
+                sta = InverseCofactor.solve(m);
+                if (sta == 0) {
+                    System.out.println("Matriks inkonsisten.");
+                } else {
+                    System.out.println("Matriks balikan menggunakan Kofaktor: ");
+                    m.displayMatrix();
+                    do {
+                        System.out.println("Tulis hasil dalam file .txt? [y/n] : ");
+                        iptstr = sc.nextLine();
+                        iptstr = sc.nextLine();
+                    } while (!iptstr.equals("y") && !iptstr.equals("Y") && !iptstr.equals("n") && !iptstr.equals("N"));
+                    if (iptstr.equals("y") || iptstr.equals("Y")) {
+                        ReadWriteText.writetxt("Matriks Balikan dari m menggunakan Kofaktor: \n" + ReadWriteText.matrixToStr(m), sc);
+                    } else {
+                        System.out.println("Hasil tidak ditulis");
+                    }
+                }
                 break;
         }
     }
