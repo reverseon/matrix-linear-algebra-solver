@@ -47,19 +47,26 @@ public class InterpolasiPolinom {
             
         }
 
-
-
-        System.out.print("\nMasukkan nilai x yang akan diaproksimasi: ");
+        System.out.print("\nMasukkan nilai x yang akan diaproksimasi (input -999 untuk keluar): ");
         approx = sc.nextFloat();
-        float result = array[0];
-        float tempApprox = approx;
-        for (int i = 1; i < size; i++){
-            result = result + tempApprox * array[i];
-            tempApprox = tempApprox * approx;
-        }
 
-        System.out.printf("Aproksimasi nilai %f terhadap interpolasi polinom: ", approx);
-        System.out.println(result);
+        while (approx != -999){
+            
+            float result = array[0];
+            float tempApprox = approx;
+            for (int i = 1; i < size; i++){
+                result = result + tempApprox * array[i];
+                tempApprox = tempApprox * approx;
+            }
+            System.out.printf("Aproksimasi nilai %f terhadap interpolasi polinom: ", approx);
+            System.out.println(result);
+
+            System.out.print("\nMasukkan nilai x yang akan diaproksimasi (input -999 untuk keluar): ");
+            approx = sc.nextFloat();
+        }
+        
+
+        
         sc.close();
     }
 }
