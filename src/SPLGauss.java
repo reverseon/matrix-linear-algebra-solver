@@ -49,27 +49,28 @@ public class SPLGauss {
                 ldo++;
             }
         }
+        System.out.println();
+        m.displayMatrix();
+        int ldoidx = -1;
         for (int i = m.ROWS-1; i >= 0; i--) {
-            boolean[] w = new boolean[m.COLS-1];
-            for (int j = 0; j < m.COLS-1; j++) {
-                if (Float.compare((m.e(i,j) + 0.0f), 0) == 0) {
-                    w[j] = false;
-                } else {
-                    w[j] = true;
+            ldoidx = -1;
+            for (int j = m.COLS-1; j >= 0; j--) {
+                if (Matrix.format(m.e(i,j)).equals("1.00")) {
+                    ldoidx = j;
+                    break;
                 }
             }
-            for (int ic = 0; ic < m.ROWS; ic++) {
-                if (ic != i) {
-                    for (int jc = 0; jc < m.COLS-1; jc++) {
-                        if (w[jc] && Float.compare((m.e(ic, jc) + 0.0f), 0) != 0) {
-                            float mltp = -1*(m.e(ic, jc) / m.e(i, jc));
-                            m.tb(ic, i, mltp);
-                            break; // CUKUP SATU AJA
-                        }
+            if (ldoidx != -1) {
+                for (int ic = 0; ic < m.ROWS; ic++) {
+                    if (ic != i) {
+                        float mltp = -1*(m.e(ic, ldoidx));
+                        m.tb(ic, i, mltp);
                     }
                 }
             }
         }
+        System.out.println();
+        m.displayMatrix();
         return 1;
     }
 }

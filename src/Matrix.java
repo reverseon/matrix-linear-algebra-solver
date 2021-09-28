@@ -62,33 +62,88 @@ public class Matrix {
     }
 
     public void displayAsEqn() {
+        // I.S. REDUCED ECHELON FORM
+        int a[] = new int[this.COLS-1];
+        for (int i = 0; i < this.COLS - 1; i++) {
+            a[i] = 0;
+        }
+        int ctr = 0;
         for (int i = 0; i < this.ROWS; i++) {
-            int v = 0;
-            for (int j = 0; j < this.COLS; j++) {
-                if (j == this.COLS-1 && v > 0) {
-                    System.out.print("= " + (format(e(i,j) + 0.0f)));
-                } else
-                if ((format(e(i,j))).equals("0.00")) {
-                    continue;
-                } else
-                if ((format(e(i,j))).equals("1.00")) {
-                    v++;
-                    if (v > 1) {
-                        System.out.print("+ ");
-                    }
-                    System.out.print("x"+(j+1)+" ");
-                } else {
-                    v++;
-                    if (v > 1) {
-                        System.out.print("+ ");
-                    }
-                    System.out.print((format(e(i,j))) + "x"+ (j+1)+" ");
+            boolean fRight = true;
+            boolean anyprint = false;
+            int ldo = -1;
+            for (int j = 0; j < this.COLS-1; j++) {
+                if (e(i, j) == 1) {
+                    ldo = j;
+                    System.out.print("x" + (j + 1) + " = ");
+                    break;
                 }
             }
-            if (v > 0) {
+            for (int j = this.COLS-1; j > ldo; j--) {
+                if (j == this.COLS-1) {
+                    if (format(e(i,j)).equals("0.00")) {
+                        continue;
+                    } else {
+                        anyprint = true;
+                        fRight = false;
+                        System.out.print(format(e(i,j)) + " ");
+                    }
+                } else {
+                    if (Float.compare(-1*(e(i,j)), 0) < 0) {
+                        String incheck = format(e(i,j));
+                        if (incheck.equals("0.00")) {
+                            continue;
+                        } else
+                        if (incheck.equals("1.00")) {
+                            anyprint = true;
+                            fRight = false;
+                            System.out.print((fRight ? "" : "- ") + "t");
+                            if (a[j] == 0) {
+                                ctr++;
+                                a[j] = ctr;
+                            }
+                            System.out.print(a[j] + " ");
+                        } else {
+                            anyprint = true;
+                            fRight = false;
+                            System.out.print((fRight ? "" : "- ") + incheck + "t");
+                            if (a[j] == 0) {
+                                ctr++;
+                                a[j] = ctr;
+                            }
+                            System.out.print(a[j] + " ");
+                        }
+                    } else 
+                    if (Float.compare(-1*(e(i,j)), 0) > 0) {
+                        String incheck = format(-1*e(i,j));
+                        if (incheck.equals("0.00")) {
+                            continue;
+                        } else
+                        if (incheck.equals("1.00")) {
+                            anyprint = true;
+                            fRight = false;
+                            System.out.print((fRight ? "" : "+ ") + "t");
+                            if (a[j] == 0) {
+                                ctr++;
+                                a[j] = ctr;
+                            }
+                            System.out.print(a[j] + " ");
+                        } else {
+                            anyprint = true;
+                            fRight = false;
+                            System.out.print((fRight ? "" : "+ ") + incheck + "t");
+                            if (a[j] == 0) {
+                                ctr++;
+                                a[j] = ctr;
+                            }
+                            System.out.print(a[j] + " ");
+                        }
+                    }
+                }
+            }
+            if (anyprint) {
                 System.out.println();
             }
-            
         }
     }
 }
