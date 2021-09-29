@@ -5,7 +5,7 @@ public class mainpr {
     // TODO: ReadWriteText.writetxt implementations to all options. my head died.
     public static void main(String[] args) {
         int input, exitcode;
-        Matrix m = new Matrix(5, 5);
+        Matrix m = new Matrix(100, 100);
         exitcode = 0;
         while (exitcode == 0) {
             mainMenu();
@@ -67,13 +67,76 @@ public class mainpr {
         switch (input) {
             case 1:
                 System.out.println("1 Selected.");
-                System.out.println("Masukkan pilihan input [1] keyboard | [2] file .txt (1/2) : ");
+                System.out.println("\nMasukkan pilihan input [1] keyboard | [2] file .txt (1/2) : ");
                 ipt1 = input(sc, ipt1, 1, 2);
                 switch (ipt1) {
                     case 1:
-                        m.ROWS = sc.nextInt();
-                        m.COLS = sc.nextInt();
-                        m.readMatrix(sc);
+                        int opt;
+                        System.out.println("\n[1] Masukan Ax = B\n[2] Matriks Augmented\n[3] Matriks Hilbert");
+                        opt = sc.nextInt();
+                        switch (opt){ 
+                            case 1:
+                                System.out.println("1 Selected.");
+
+                                int tempRows, tempCols;
+                                System.out.print("Masukkan ukuran baris matriks A: ");
+                                tempRows = sc.nextInt();
+                                System.out.print("Masukkan ukuran kolom matriks A: ");
+                                tempCols = sc.nextInt();
+                                
+                                Matrix AMatrix = new Matrix(tempRows, tempCols);
+                                System.out.println("Masukkan matriks A: ");
+                                AMatrix.readMatrix(sc);
+                                System.out.print("Masukkan matriks B (ukuran baris x 1) dalam bentuk baris: ");
+                                
+                                float[] BMatrix = new float[tempRows];
+                                for(int i = 0; i < tempRows; i++){
+                                    BMatrix[i] = sc.nextFloat();
+                                }
+
+                                m.ROWS = tempRows;
+                                m.COLS = tempCols + 1;
+
+                                for(int i = 0; i < tempRows; i++){
+                                    for (int j = 0; j < tempCols; j++){
+                                        m.set(i, j, AMatrix.e(i, j));
+                                    }
+                                }
+
+                                for(int i = 0; i < tempRows; i++){
+                                    m.set(i, tempCols, BMatrix[i]);
+                                }
+
+                                break;
+                            case 2:
+                                System.out.println("2 Selected.");
+                                System.out.print("Masukkan ukuran baris matriks: ");
+                                m.ROWS = sc.nextInt();
+                                System.out.print("Masukkan ukuran kolom matriks: ");
+                                m.COLS = sc.nextInt();
+                                System.out.println("Masukkan matriks: ");
+                                m.readMatrix(sc);
+                                break;
+                            /*
+                            case 3:
+                                System.out.println("3 Selected");
+                                int dimension;
+                                System.out.print("Masukkan dimensi matriks: ");
+                                dimension = sc.nextInt();
+                                m.ROWS = dimension;
+                                m.COLS = dimension;
+                                for(int i = 0; i < dimension; i++){
+                                    for(int j = 0; j < dimension; j++){
+                                        float frac = ((float)1 / (i + j + 1));
+
+                                        m.set(i, j, frac);
+                                    }
+                                }
+                                m.displayMatrix();
+                                InverseOBE.solve(m);
+                                m.displayMatrix();
+                                break; */
+                        }
                         break;
                     case 2:
                         ReadWriteText.readtxt(m, sc);
@@ -81,7 +144,12 @@ public class mainpr {
                 }
                 result = SPLGauss.solve(m);
                 System.out.println("Hasil perhitungan menggunakan metode eliminasi Gauss: ");
-                System.out.println(result);
+                if (result == 0){
+                    m.displayMatrix();
+                    System.out.println("Sistem inkonsisten.");
+                } else {
+                    m.displayAsEqn();
+                }
                 break;
             case 2:
                 System.out.println("2 Selected.");
@@ -89,9 +157,71 @@ public class mainpr {
                 ipt1 = input(sc, ipt1, 1, 2);
                 switch (ipt1) {
                     case 1:
-                        m.ROWS = sc.nextInt();
-                        m.COLS = sc.nextInt();
-                        m.readMatrix(sc);
+                        int opt;
+                        System.out.println("\n[1] Masukan Ax = B\n[2] Matriks Augmented\n[3] Matriks Hilbert");
+                        opt = sc.nextInt();
+                        switch (opt){ 
+                            case 1:
+                                System.out.println("1 Selected.");
+
+                                int tempRows, tempCols;
+                                System.out.print("Masukkan ukuran baris matriks A: ");
+                                tempRows = sc.nextInt();
+                                System.out.print("Masukkan ukuran kolom matriks A: ");
+                                tempCols = sc.nextInt();
+                                
+                                Matrix AMatrix = new Matrix(tempRows, tempCols);
+                                System.out.println("Masukkan matriks A: ");
+                                AMatrix.readMatrix(sc);
+                                System.out.print("Masukkan matriks B (ukuran baris x 1) dalam bentuk baris: ");
+                                
+                                float[] BMatrix = new float[tempRows];
+                                for(int i = 0; i < tempRows; i++){
+                                    BMatrix[i] = sc.nextFloat();
+                                }
+
+                                m.ROWS = tempRows;
+                                m.COLS = tempCols + 1;
+
+                                for(int i = 0; i < tempRows; i++){
+                                    for (int j = 0; j < tempCols; j++){
+                                        m.set(i, j, AMatrix.e(i, j));
+                                    }
+                                }
+
+                                for(int i = 0; i < tempRows; i++){
+                                    m.set(i, tempCols, BMatrix[i]);
+                                }
+
+                                break;
+                            case 2:
+                                System.out.println("2 Selected.");
+                                System.out.print("Masukkan ukuran baris matriks: ");
+                                m.ROWS = sc.nextInt();
+                                System.out.print("Masukkan ukuran kolom matriks: ");
+                                m.COLS = sc.nextInt();
+                                System.out.println("Masukkan matriks: ");
+                                m.readMatrix(sc);
+                                break;
+                            case 3:
+                                System.out.println("3 Selected");
+                                int dimension;
+                                System.out.print("Masukkan dimensi matriks: ");
+                                dimension = sc.nextInt();
+                                m.ROWS = dimension;
+                                m.COLS = dimension;
+                                for(int i = 0; i < dimension; i++){
+                                    for(int j = 0; j < dimension; j++){
+                                        float frac = ((float)1 / (i + j + 1));
+
+                                        m.set(i, j, frac);
+                                    }
+                                }
+                                m.displayMatrix();
+                                InverseCofactor.solve(m);
+                                m.displayMatrix();
+                                break;
+                        }
                         break;
                     case 2:
                         ReadWriteText.readtxt(m, sc);
@@ -99,7 +229,12 @@ public class mainpr {
                 }
                 result = SPLGaussJordan.solve(m);
                 System.out.println("Hasil perhitungan menggunakan metode eliminasi Gauss-Jordan: ");
-                System.out.println(result);
+                if (result == 0){
+                    System.out.println("Sistem inkonsisten.");
+                    m.displayAsEqn();
+                } else {
+                    m.displayAsEqn();
+                }
                 break;
             case 3:
                 System.out.println("3 Selected.");
@@ -107,17 +242,81 @@ public class mainpr {
                 ipt1 = input(sc, ipt1, 1, 2);
                 switch (ipt1) {
                     case 1:
-                        m.ROWS = sc.nextInt();
-                        m.COLS = sc.nextInt();
-                        m.readMatrix(sc);
+                        int opt;
+                        System.out.println("\n[1] Masukan Ax = B\n[2] Matriks Augmented\n[3] Matriks Hilbert");
+                        opt = sc.nextInt();
+                        switch (opt){ 
+                            case 1:
+                                System.out.println("1 Selected.");
+
+                                int tempRows, tempCols;
+                                System.out.print("Masukkan ukuran baris matriks A: ");
+                                tempRows = sc.nextInt();
+                                System.out.print("Masukkan ukuran kolom matriks A: ");
+                                tempCols = sc.nextInt();
+                                
+                                Matrix AMatrix = new Matrix(tempRows, tempCols);
+                                System.out.println("Masukkan matriks A: ");
+                                AMatrix.readMatrix(sc);
+                                System.out.print("Masukkan matriks B (ukuran baris x 1) dalam bentuk baris: ");
+                                
+                                float[] BMatrix = new float[tempRows];
+                                for(int i = 0; i < tempRows; i++){
+                                    BMatrix[i] = sc.nextFloat();
+                                }
+
+                                m.ROWS = tempRows;
+                                m.COLS = tempCols + 1;
+
+                                for(int i = 0; i < tempRows; i++){
+                                    for (int j = 0; j < tempCols; j++){
+                                        m.set(i, j, AMatrix.e(i, j));
+                                    }
+                                }
+
+                                for(int i = 0; i < tempRows; i++){
+                                    m.set(i, tempCols, BMatrix[i]);
+                                }
+
+                                break;
+                            case 2:
+                                System.out.println("2 Selected.");
+                                System.out.print("Masukkan ukuran baris matriks: ");
+                                m.ROWS = sc.nextInt();
+                                System.out.print("Masukkan ukuran kolom matriks: ");
+                                m.COLS = sc.nextInt();
+                                System.out.println("Masukkan matriks: ");
+                                m.readMatrix(sc);
+                                break;
+                            case 3:
+                                System.out.println("3 Selected");
+                                int dimension;
+                                System.out.print("Masukkan dimensi matriks: ");
+                                dimension = sc.nextInt();
+                                m.ROWS = dimension;
+                                m.COLS = dimension;
+                                for(int i = 0; i < dimension; i++){
+                                    for(int j = 0; j < dimension; j++){
+                                        float frac = ((float)1 / (i + j + 1));
+
+                                        m.set(i, j, frac);
+                                    }
+                                }
+                                m.displayMatrix();
+                                InverseCofactor.solve(m);
+                                m.displayMatrix();
+                                break;
+                        }
                         break;
                     case 2:
                         ReadWriteText.readtxt(m, sc);
                         break;
                 }
                 result = 0;
+                Matrix mOut = new Matrix(m.ROWS, m.COLS);
+                SPLInverse.solve(m, mOut);
                 System.out.println("Hasil perhitungan menggunakan metode Matriks balikan: ");
-                System.out.println(result);
+                m.displayMatrix();
                 break;
             case 4:
                 System.out.println("4 Selected.");
@@ -125,16 +324,83 @@ public class mainpr {
                 ipt1 = input(sc, ipt1, 1, 2);
                 switch (ipt1) {
                     case 1:
-                        m.ROWS = sc.nextInt();
-                        m.COLS = sc.nextInt();
-                        m.readMatrix(sc);
+                        int opt;
+                        System.out.println("\n[1] Masukan Ax = B\n[2] Matriks Augmented\n[3] Matriks Hilbert");
+                        opt = sc.nextInt();
+                        switch (opt){ 
+                            case 1:
+                                System.out.println("1 Selected.");
+
+                                int tempRows, tempCols;
+                                System.out.print("Masukkan ukuran baris matriks A: ");
+                                tempRows = sc.nextInt();
+                                System.out.print("Masukkan ukuran kolom matriks A: ");
+                                tempCols = sc.nextInt();
+                                
+                                Matrix AMatrix = new Matrix(tempRows, tempCols);
+                                System.out.println("Masukkan matriks A: ");
+                                AMatrix.readMatrix(sc);
+                                System.out.print("Masukkan matriks B (ukuran baris x 1) dalam bentuk baris: ");
+                                
+                                float[] BMatrix = new float[tempRows];
+                                for(int i = 0; i < tempRows; i++){
+                                    BMatrix[i] = sc.nextFloat();
+                                }
+
+                                m.ROWS = tempRows;
+                                m.COLS = tempCols + 1;
+
+                                for(int i = 0; i < tempRows; i++){
+                                    for (int j = 0; j < tempCols; j++){
+                                        m.set(i, j, AMatrix.e(i, j));
+                                    }
+                                }
+
+                                for(int i = 0; i < tempRows; i++){
+                                    m.set(i, tempCols, BMatrix[i]);
+                                }
+
+                                break;
+                            case 2:
+                                System.out.println("2 Selected.");
+                                System.out.print("Masukkan ukuran baris matriks: ");
+                                m.ROWS = sc.nextInt();
+                                System.out.print("Masukkan ukuran kolom matriks: ");
+                                m.COLS = sc.nextInt();
+                                System.out.println("Masukkan matriks: ");
+                                m.readMatrix(sc);
+                                break;
+                            case 3:
+                                System.out.println("3 Selected");
+                                int dimension;
+                                System.out.print("Masukkan dimensi matriks: ");
+                                dimension = sc.nextInt();
+                                m.ROWS = dimension;
+                                m.COLS = dimension;
+                                for(int i = 0; i < dimension; i++){
+                                    for(int j = 0; j < dimension; j++){
+                                        float frac = ((float)1 / (i + j + 1));
+
+                                        m.set(i, j, frac);
+                                    }
+                                }
+                                m.displayMatrix();
+                                InverseCofactor.solve(m);
+                                m.displayMatrix();
+                                break;
+                        }
                         break;
                     case 2:
                         ReadWriteText.readtxt(m, sc);
                         break;
                 }
                 result = 0;
-                System.out.println("Hasil perhitungan menggunakan kaidah Crammer: ");
+                if (m.ROWS == m.COLS - 1){
+                    System.out.println("Hasil perhitungan menggunakan kaidah Crammer: ");
+                    SPLCramer.Cramer(m);
+                } else {
+                    System.out.println("Matriks tidak memenuhi persyaratan.");
+                }
                 System.out.println(result);
                 break;
             case 5:
@@ -152,8 +418,10 @@ public class mainpr {
         input = input(sc, input, 1, 2);
         switch (input) {
             case 1:
+                System.out.println("Masukkan banyaknya baris matriks: ");
                 m.ROWS = sc.nextInt();
                 m.COLS = m.ROWS;
+                System.out.println("Kolom matriks disesuaikan dengan baris matriks. Masukkan matriks persegi berukuran baris x baris: ");
                 m.readMatrix(sc);
                 break;
             case 2:
@@ -169,7 +437,7 @@ public class mainpr {
             iptstr = sc.nextLine();
         } while (!iptstr.equals("y") && !iptstr.equals("Y") && !iptstr.equals("n") && !iptstr.equals("N"));
         if (iptstr.equals("y") || iptstr.equals("Y")) {
-            ReadWriteText.writetxt("Determinan dengan ekspansi kofaktor adalah " + resKofaktor + "\nDeterminan dengan ekspansi kofaktor adalah " + resGauss + "\n", sc);
+            ReadWriteText.writetxt("Determinan dengan ekspansi kofaktor adalah " + resKofaktor + "\nDeterminan dengan reduksi baris adalah " + resGauss + "\n", sc);
         } else {
             System.out.println("Hasil tidak ditulis");
         }
@@ -187,6 +455,7 @@ public class mainpr {
                 System.out.print("Panjang baris dan kolom: ");
                 m.ROWS = sc.nextInt();
                 m.COLS = m.ROWS;
+                System.out.println("Kolom matriks disesuaikan dengan baris matriks. Masukkan matriks persegi berukuran baris x baris: ");
                 m.readMatrix(sc);
                 break;
             case 2:
