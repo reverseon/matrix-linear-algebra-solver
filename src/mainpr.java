@@ -342,61 +342,79 @@ public class mainpr {
                         opt = sc.nextInt();
                         switch (opt){ 
                             case 1:
-                                System.out.println("1 Selected.");
+                            System.out.println("1 Selected.");
 
-                                int tempRows, tempCols;
-                                System.out.print("Masukkan ukuran baris matriks A: ");
-                                tempRows = sc.nextInt();
-                                System.out.print("Masukkan ukuran kolom matriks A: ");
-                                tempCols = sc.nextInt();
-                                
-                                Matrix AMatrix = new Matrix(tempRows, tempCols);
-                                System.out.println("Masukkan matriks A: ");
-                                AMatrix.readMatrix(sc);
-                                System.out.print("Masukkan matriks B (ukuran baris x 1) dalam bentuk baris: ");
-                                
-                                float[] BMatrix = new float[tempRows];
-                                for(int i = 0; i < tempRows; i++){
-                                    BMatrix[i] = sc.nextFloat();
+                            int tempRows, tempCols;
+                            System.out.print("Masukkan ukuran baris matriks A: ");
+                            tempRows = sc.nextInt();
+                            System.out.print("Masukkan ukuran kolom matriks A: ");
+                            tempCols = sc.nextInt();
+                            
+                            Matrix AMatrix = new Matrix(tempRows, tempCols);
+                            System.out.println("Masukkan matriks A: ");
+                            AMatrix.readMatrix(sc);
+
+                            strOut = strOut.concat("Matriks A: \n" + ReadWriteText.matrixToStr(AMatrix) + "\n\n Matriks B: \n");
+                            System.out.print("Masukkan matriks B (ukuran baris x 1) dalam bentuk baris: ");
+                            
+                            float[] BMatrix = new float[tempRows];
+                            for(int i = 0; i < tempRows; i++){
+                                BMatrix[i] = sc.nextFloat();
+                                strOut = strOut.concat(Float.toString(BMatrix[i]) + " ");
+                            }
+
+                            m.ROWS = tempRows;
+                            m.COLS = tempCols + 1;
+
+                            for(int i = 0; i < tempRows; i++){
+                                for (int j = 0; j < tempCols; j++){
+                                    m.set(i, j, AMatrix.e(i, j));
                                 }
+                            }
 
-                                m.ROWS = tempRows;
-                                m.COLS = tempCols + 1;
+                            for(int i = 0; i < tempRows; i++){
+                                m.set(i, tempCols, BMatrix[i]);
+                            }
 
-                                for(int i = 0; i < tempRows; i++){
-                                    for (int j = 0; j < tempCols; j++){
-                                        m.set(i, j, AMatrix.e(i, j));
-                                    }
-                                }
-
-                                for(int i = 0; i < tempRows; i++){
-                                    m.set(i, tempCols, BMatrix[i]);
-                                }
-
-                                break;
-                            case 2:
-                                System.out.println("2 Selected.");
-                                System.out.print("Masukkan ukuran baris matriks: ");
-                                m.ROWS = sc.nextInt();
-                                System.out.print("Masukkan ukuran kolom matriks: ");
-                                m.COLS = sc.nextInt();
-                                System.out.println("Masukkan matriks: ");
-                                m.readMatrix(sc);
-                                break;
+                            break;
+                        case 2:
+                            System.out.println("2 Selected.");
+                            System.out.print("Masukkan ukuran baris matriks: ");
+                            m.ROWS = sc.nextInt();
+                            System.out.print("Masukkan ukuran kolom matriks: ");
+                            m.COLS = sc.nextInt();
+                            System.out.println("Masukkan matriks: ");
+                            m.readMatrix(sc);
+                            strOut = strOut.concat("Matriks augmented: \n" + ReadWriteText.matrixToStr(m));
+                            break;
                         }
                         break;
                     case 2:
                         ReadWriteText.readtxt(m, sc);
                         break;
                 }
-                result = 0;
-                if (m.ROWS == m.COLS - 1){
-                    System.out.println("Hasil perhitungan menggunakan kaidah Crammer: ");
-                    SPLCramer.Cramer(m);
+
+                if (m.ROWS == m.COLS - 1 && Det.determinanKofaktor(m) != 0 ){
+                    System.out.println("Hasil perhitungan menggunakan kaidah Cramer: ");
+                    strOut = strOut.concat("\nHasil perhitungan menggunakan kaidah Cramer: \n");
+                    float array[] = SPLCramer.Cramer(m);
+                    for(int i = 0; i < m.ROWS; i++){
+                        strOut = strOut.concat("x" + i + " = " + Float.toString(array[i]) + "\n");
+                    }
                 } else {
                     System.out.println("Matriks tidak memenuhi persyaratan.");
                 }
-                System.out.println(result);
+                do {
+                    iptstr = sc.nextLine();
+                    System.out.println("Tulis hasil dalam file .txt? [y/n] : ");
+                    iptstr = sc.nextLine();
+                } while (!iptstr.equals("y") && !iptstr.equals("Y") && !iptstr.equals("n") && !iptstr.equals("N"));
+                if (iptstr.equals("y") || iptstr.equals("Y")) {
+                    ReadWriteText.writetxt(strOut + "\n", sc);
+                } else {
+                    System.out.println("Hasil tidak ditulis");
+                }
+    
                 break;
             case 5:
                 System.out.println("5 Selected.");
