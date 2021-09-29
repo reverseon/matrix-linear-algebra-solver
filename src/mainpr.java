@@ -63,14 +63,16 @@ public class mainpr {
         System.out.println("[3] Metode matriks balikan\n[4] Kaidah Cramer\n[5] Kembali");
         System.out.println("Masukkan pilihan menu (1/2/3/4/5) : ");
         input = input(sc, input, 1, 5);
-
+        String strOut = "";
+        String iptstr = "";
         switch (input) {
             case 1:
+                
                 System.out.println("1 Selected.");
                 System.out.println("\nMasukkan pilihan input [1] keyboard | [2] file .txt (1/2) : ");
                 ipt1 = input(sc, ipt1, 1, 2);
                 switch (ipt1) {
-                    case 1:
+                    case 1: 
                         int opt;
                         System.out.println("\n[1] Masukan Ax = B\n[2] Matriks Augmented\n");
                         opt = sc.nextInt();
@@ -87,11 +89,14 @@ public class mainpr {
                                 Matrix AMatrix = new Matrix(tempRows, tempCols);
                                 System.out.println("Masukkan matriks A: ");
                                 AMatrix.readMatrix(sc);
+
+                                strOut = strOut.concat("Matriks A: \n" + ReadWriteText.matrixToStr(AMatrix) + "\n\n Matriks B: \n");
                                 System.out.print("Masukkan matriks B (ukuran baris x 1) dalam bentuk baris: ");
                                 
                                 float[] BMatrix = new float[tempRows];
                                 for(int i = 0; i < tempRows; i++){
                                     BMatrix[i] = sc.nextFloat();
+                                    strOut = strOut.concat(Float.toString(BMatrix[i]) + " ");
                                 }
 
                                 m.ROWS = tempRows;
@@ -116,30 +121,48 @@ public class mainpr {
                                 m.COLS = sc.nextInt();
                                 System.out.println("Masukkan matriks: ");
                                 m.readMatrix(sc);
+                                strOut = strOut.concat("Matriks augmented: \n" + ReadWriteText.matrixToStr(m));
                                 break;
                         }
                         break;
                     case 2:
                         ReadWriteText.readtxt(m, sc);
+                        strOut = strOut.concat("Matriks augmented: \n" + ReadWriteText.matrixToStr(m));
                         break;
                 }
                 result = SPLGauss.solve(m);
                 System.out.println("Hasil perhitungan menggunakan metode eliminasi Gauss: ");
+                strOut = strOut.concat("\nHasil perhitungan menggunakan metode eliminasi Gauss: \n");
                 if (result == 0){
                     m.displayMatrix();
                     System.out.println("Sistem inkonsisten.");
+                    strOut = strOut.concat(ReadWriteText.matrixToStr(m) + "\nSistem inkonsisten, tidak ditemukan solusi.");
                 } else {
                     m.displayAsEqn();
+                    strOut = strOut.concat("\n" + m.returnEqn());
                 }
+
+                
+                do {
+                    iptstr = sc.nextLine();
+                    System.out.println("Tulis hasil dalam file .txt? [y/n] : ");
+                    iptstr = sc.nextLine();
+                } while (!iptstr.equals("y") && !iptstr.equals("Y") && !iptstr.equals("n") && !iptstr.equals("N"));
+                if (iptstr.equals("y") || iptstr.equals("Y")) {
+                    ReadWriteText.writetxt(strOut + "\n", sc);
+                } else {
+                    System.out.println("Hasil tidak ditulis");
+                }
+
                 break;
             case 2:
                 System.out.println("2 Selected.");
-                System.out.println("Masukkan pilihan input [1] keyboard | [2] file .txt (1/2) : ");
+                System.out.println("\nMasukkan pilihan input [1] keyboard | [2] file .txt (1/2) : ");
                 ipt1 = input(sc, ipt1, 1, 2);
                 switch (ipt1) {
-                    case 1:
+                    case 1: 
                         int opt;
-                        System.out.println("\n[1] Masukan Ax = B\n[2] Matriks Augmented");
+                        System.out.println("\n[1] Masukan Ax = B\n[2] Matriks Augmented\n");
                         opt = sc.nextInt();
                         switch (opt){ 
                             case 1:
@@ -154,11 +177,14 @@ public class mainpr {
                                 Matrix AMatrix = new Matrix(tempRows, tempCols);
                                 System.out.println("Masukkan matriks A: ");
                                 AMatrix.readMatrix(sc);
+
+                                strOut = strOut.concat("Matriks A: \n" + ReadWriteText.matrixToStr(AMatrix) + "\n\n Matriks B: \n");
                                 System.out.print("Masukkan matriks B (ukuran baris x 1) dalam bentuk baris: ");
                                 
                                 float[] BMatrix = new float[tempRows];
                                 for(int i = 0; i < tempRows; i++){
                                     BMatrix[i] = sc.nextFloat();
+                                    strOut = strOut.concat(Float.toString(BMatrix[i]) + " ");
                                 }
 
                                 m.ROWS = tempRows;
@@ -183,86 +209,128 @@ public class mainpr {
                                 m.COLS = sc.nextInt();
                                 System.out.println("Masukkan matriks: ");
                                 m.readMatrix(sc);
+                                strOut = strOut.concat("Matriks augmented: \n" + ReadWriteText.matrixToStr(m));
                                 break;
                         }
                         break;
                     case 2:
                         ReadWriteText.readtxt(m, sc);
+                        strOut = strOut.concat("Matriks augmented: \n" + ReadWriteText.matrixToStr(m));
                         break;
                 }
                 result = SPLGaussJordan.solve(m);
                 System.out.println("Hasil perhitungan menggunakan metode eliminasi Gauss-Jordan: ");
+                strOut = strOut.concat("\nHasil perhitungan menggunakan metode eliminasi Gauss-Jordan: \n");
                 if (result == 0){
+                    m.displayMatrix();
                     System.out.println("Sistem inkonsisten.");
-                    m.displayAsEqn();
+                    strOut = strOut.concat(ReadWriteText.matrixToStr(m) + "\nSistem inkonsisten, tidak ditemukan solusi.");
                 } else {
                     m.displayAsEqn();
+                    strOut = strOut.concat("\n" + m.returnEqn());
                 }
+
+                do {
+                    iptstr = sc.nextLine();
+                    System.out.println("Tulis hasil dalam file .txt? [y/n] : ");
+                    iptstr = sc.nextLine();
+                } while (!iptstr.equals("y") && !iptstr.equals("Y") && !iptstr.equals("n") && !iptstr.equals("N"));
+                if (iptstr.equals("y") || iptstr.equals("Y")) {
+                    ReadWriteText.writetxt(strOut + "\n", sc);
+                } else {
+                    System.out.println("Hasil tidak ditulis");
+                }
+
                 break;
             case 3:
-                System.out.println("3 Selected.");
-                System.out.println("Masukkan pilihan input [1] keyboard | [2] file .txt (1/2) : ");
-                ipt1 = input(sc, ipt1, 1, 2);
-                switch (ipt1) {
-                    case 1:
-                        int opt;
-                        System.out.println("\n[1] Masukan Ax = B\n[2] Matriks Augmented");
-                        opt = sc.nextInt();
-                        switch (opt){ 
-                            case 1:
-                                System.out.println("1 Selected.");
+            System.out.println("3 Selected.");
+            System.out.println("\nMasukkan pilihan input [1] keyboard | [2] file .txt (1/2) : ");
+            ipt1 = input(sc, ipt1, 1, 2);
+            switch (ipt1) {
+                case 1: 
+                    int opt;
+                    System.out.println("\n[1] Masukan Ax = B\n[2] Matriks Augmented\n");
+                    opt = sc.nextInt();
+                    switch (opt){ 
+                        case 1:
+                            System.out.println("1 Selected.");
 
-                                int tempRows, tempCols;
-                                System.out.print("Masukkan ukuran baris matriks A: ");
-                                tempRows = sc.nextInt();
-                                System.out.print("Masukkan ukuran kolom matriks A: ");
-                                tempCols = sc.nextInt();
-                                
-                                Matrix AMatrix = new Matrix(tempRows, tempCols);
-                                System.out.println("Masukkan matriks A: ");
-                                AMatrix.readMatrix(sc);
-                                System.out.print("Masukkan matriks B (ukuran baris x 1) dalam bentuk baris: ");
-                                
-                                float[] BMatrix = new float[tempRows];
-                                for(int i = 0; i < tempRows; i++){
-                                    BMatrix[i] = sc.nextFloat();
+                            int tempRows, tempCols;
+                            System.out.print("Masukkan ukuran baris matriks A: ");
+                            tempRows = sc.nextInt();
+                            System.out.print("Masukkan ukuran kolom matriks A: ");
+                            tempCols = sc.nextInt();
+                            
+                            Matrix AMatrix = new Matrix(tempRows, tempCols);
+                            System.out.println("Masukkan matriks A: ");
+                            AMatrix.readMatrix(sc);
+
+                            strOut = strOut.concat("Matriks A: \n" + ReadWriteText.matrixToStr(AMatrix) + "\n\n Matriks B: \n");
+                            System.out.print("Masukkan matriks B (ukuran baris x 1) dalam bentuk baris: ");
+                            
+                            float[] BMatrix = new float[tempRows];
+                            for(int i = 0; i < tempRows; i++){
+                                BMatrix[i] = sc.nextFloat();
+                                strOut = strOut.concat(Float.toString(BMatrix[i]) + " ");
+                            }
+
+                            m.ROWS = tempRows;
+                            m.COLS = tempCols + 1;
+
+                            for(int i = 0; i < tempRows; i++){
+                                for (int j = 0; j < tempCols; j++){
+                                    m.set(i, j, AMatrix.e(i, j));
                                 }
+                            }
 
-                                m.ROWS = tempRows;
-                                m.COLS = tempCols + 1;
+                            for(int i = 0; i < tempRows; i++){
+                                m.set(i, tempCols, BMatrix[i]);
+                            }
 
-                                for(int i = 0; i < tempRows; i++){
-                                    for (int j = 0; j < tempCols; j++){
-                                        m.set(i, j, AMatrix.e(i, j));
-                                    }
-                                }
+                            break;
+                        case 2:
+                            System.out.println("2 Selected.");
+                            System.out.print("Masukkan ukuran baris matriks: ");
+                            m.ROWS = sc.nextInt();
+                            System.out.print("Masukkan ukuran kolom matriks: ");
+                            m.COLS = sc.nextInt();
+                            System.out.println("Masukkan matriks: ");
+                            m.readMatrix(sc);
+                            strOut = strOut.concat("Matriks augmented: \n" + ReadWriteText.matrixToStr(m));
+                            break;
+                    }
+                    break;
+                case 2:
+                    ReadWriteText.readtxt(m, sc);
+                    strOut = strOut.concat("Matriks augmented: \n" + ReadWriteText.matrixToStr(m));
+                    break;
+            }
+            Matrix ans = new Matrix(m.ROWS, 1);
+            result = SPLInverse.solve(m, ans);
+            ans.displayMatrix();
+            System.out.println("Hasil perhitungan menggunakan metode invers: ");
+            strOut = strOut.concat("\nHasil perhitungan menggunakan metode eliminasi inversn: \n");
+            if (result == 0){
+                ans.displayMatrix();
+                System.out.println("Sistem tidak dapat diselesaikan.");
+                strOut = strOut.concat(ReadWriteText.matrixToStr(m) + "\nSistem inkonsisten, tidak ditemukan solusi.");
+            } else {
+                ans.displayAsEqn();
+                strOut = strOut.concat("\n" + ans.returnEqn());
+            }
 
-                                for(int i = 0; i < tempRows; i++){
-                                    m.set(i, tempCols, BMatrix[i]);
-                                }
+            do {
+                iptstr = sc.nextLine();
+                System.out.println("Tulis hasil dalam file .txt? [y/n] : ");
+                iptstr = sc.nextLine();
+            } while (!iptstr.equals("y") && !iptstr.equals("Y") && !iptstr.equals("n") && !iptstr.equals("N"));
+            if (iptstr.equals("y") || iptstr.equals("Y")) {
+                ReadWriteText.writetxt(strOut + "\n", sc);
+            } else {
+                System.out.println("Hasil tidak ditulis");
+            }
 
-                                break;
-                            case 2:
-                                System.out.println("2 Selected.");
-                                System.out.print("Masukkan ukuran baris matriks: ");
-                                m.ROWS = sc.nextInt();
-                                System.out.print("Masukkan ukuran kolom matriks: ");
-                                m.COLS = sc.nextInt();
-                                System.out.println("Masukkan matriks: ");
-                                m.readMatrix(sc);
-                                break;
-                        }
-                        break;
-                    case 2:
-                        ReadWriteText.readtxt(m, sc);
-                        break;
-                }
-                result = 0;
-                Matrix mOut = new Matrix(m.ROWS, m.COLS);
-                SPLInverse.solve(m, mOut);
-                System.out.println("Hasil perhitungan menggunakan metode Matriks balikan: ");
-                m.displayMatrix();
-                break;
+            break;
             case 4:
                 System.out.println("4 Selected.");
                 System.out.println("Masukkan pilihan input [1] keyboard | [2] file .txt (1/2) : ");
@@ -339,6 +407,7 @@ public class mainpr {
     public static void detMenu(Scanner sc, Matrix m) {
         int input = 0;
         String iptstr;
+        String strOut = "Matriks input: \n";
         float resKofaktor, resGauss;
         System.out.println("\nDETERMINAN");
         System.out.println("Masukkan pilihan input [1] keyboard | [2] file .txt (1/2) : ");
@@ -355,16 +424,18 @@ public class mainpr {
                 ReadWriteText.readtxt(m, sc);
                 break;
         }
+        strOut = strOut.concat(ReadWriteText.matrixToStr(m) + "\n");
         resKofaktor = Det.determinanKofaktor(m);
         resGauss = Det.determinanGaussian(m);
         System.out.println("Determinan dengan ekspansi kofaktor adalah " + resKofaktor);
         System.out.println("Determinan dengan reduksi baris adalah " + resGauss);
         do {
+            iptstr = sc.nextLine();
             System.out.println("Tulis hasil dalam file .txt? [y/n] : ");
             iptstr = sc.nextLine();
         } while (!iptstr.equals("y") && !iptstr.equals("Y") && !iptstr.equals("n") && !iptstr.equals("N"));
         if (iptstr.equals("y") || iptstr.equals("Y")) {
-            ReadWriteText.writetxt("Determinan dengan ekspansi kofaktor adalah " + resKofaktor + "\nDeterminan dengan reduksi baris adalah " + resGauss + "\n", sc);
+            ReadWriteText.writetxt(strOut + "Determinan dengan ekspansi kofaktor adalah " + resKofaktor + "\nDeterminan dengan reduksi baris adalah " + resGauss + "\n", sc);
         } else {
             System.out.println("Hasil tidak ditulis");
         }
@@ -389,6 +460,8 @@ public class mainpr {
                 break;
         }
         input = 0;
+        String strOut = "";
+        strOut = strOut.concat("Matriks input: \n" + ReadWriteText.matrixToStr(m) + "\n");
         System.out.println("Masukkan pilihan penyelesaian solusi menggunakan [1] OBE | [2] Kofaktor (1/2) : ");
         input = input(sc, input, 1, 2);
         switch (input) {
@@ -405,7 +478,7 @@ public class mainpr {
                         iptstr = sc.nextLine();
                     } while (!iptstr.equals("y") && !iptstr.equals("Y") && !iptstr.equals("n") && !iptstr.equals("N"));
                     if (iptstr.equals("y") || iptstr.equals("Y")) {
-                        ReadWriteText.writetxt("Matriks Balikan dari m menggunakan OBE: \n" + ReadWriteText.matrixToStr(m) + "\n", sc);
+                        ReadWriteText.writetxt(strOut + "Matriks Balikan dari m menggunakan OBE: \n" + ReadWriteText.matrixToStr(m) + "\n", sc);
                     } else {
                         System.out.println("Hasil tidak ditulis");
                     }
@@ -424,7 +497,7 @@ public class mainpr {
                         iptstr = sc.nextLine();
                     } while (!iptstr.equals("y") && !iptstr.equals("Y") && !iptstr.equals("n") && !iptstr.equals("N"));
                     if (iptstr.equals("y") || iptstr.equals("Y")) {
-                        ReadWriteText.writetxt("Matriks Balikan dari m menggunakan Kofaktor: \n" + ReadWriteText.matrixToStr(m) + "\n", sc);
+                        ReadWriteText.writetxt(strOut + "Matriks Balikan dari m menggunakan Kofaktor: \n" + ReadWriteText.matrixToStr(m) + "\n", sc);
                     } else {
                         System.out.println("Hasil tidak ditulis");
                     }
@@ -439,18 +512,17 @@ public class mainpr {
         System.out.println("\n REGRESI LINIER BERGANDA");
         System.out.println("Masukkan pilihan input [1] keyboard | [2] file .txt (1/2) : ");
         input = input(sc, input, 1, 2);
+
         switch (input) {
             case 1:
-                System.out.print("Jumlah Titik: ");
-                m.ROWS = sc.nextInt();
-                m.COLS = m.ROWS;
-                m.readMatrix(sc);
+                DoubleLinReg.linReg(sc);
                 break;
             case 2:
                 ReadWriteText.readtxt(m, sc);
+                DoubleLinReg.solve(m, sc);
                 break;
         }
-        DoubleLinReg.solve(m, sc);
+        
     }
 
     public static int input(Scanner sc, int ipt, int fOpt, int lOpt) {
