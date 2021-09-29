@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class DoubleLinReg {
     public static void solve(Matrix m, Scanner sc) {
+        String strOut = "";
         if (m.ROWS == 0 || m.COLS == 0) {
             System.out.println("No Data Available");
         } else
@@ -32,6 +33,7 @@ public class DoubleLinReg {
                     eq.set(i, j, val);
                 }
             }
+            strOut = strOut.concat(ReadWriteText.matrixToStr(eq));
             Matrix res = new Matrix(eq.COLS-1, 1);
             SPLInverse.solve(eq, res);
             float pred = res.e(0, 0);
@@ -41,6 +43,51 @@ public class DoubleLinReg {
                 pred += temp*res.e(i, 0);
             }
             System.out.println("Prediksi: " + Matrix.format(pred));
+            strOut = strOut.concat("\nSistem persamaan linear yang terbentuk:\n");
+            System.out.println("\nSPL yang terbentuk: ");
+            String tempStr = " ";
+            for(int i = 0; i < eq.ROWS; i++){
+                tempStr = "" ;
+                for(int j = 0; j < eq.COLS; j++){
+                    if(j + 1 != eq.COLS){
+                        System.out.print(eq.e(i,j) + "x" + j);
+                        tempStr = tempStr.concat(eq.e(i, j) + "x" + j);
+                        if (j + 1 < eq.COLS - 1){
+                            if (eq.e(i, j + 1) > 0){
+                                System.out.print(" + ");
+                                tempStr = tempStr.concat(" + ");
+                            } else {
+                                System.out.print(" ");
+                                tempStr = tempStr.concat(" ");
+                            }
+                        }
+                    } else {
+                        System.out.print(" = " + eq.e(i, j));
+                        tempStr = tempStr.concat(" = " + eq.e(i, j));
+                    }
+                }
+                System.out.println("");
+                tempStr = tempStr.concat("\n");
+                strOut = strOut.concat(tempStr);
+            }
+            String iptstr = "";
+            do {
+                iptstr = sc.nextLine();
+                System.out.println("Tulis hasil dalam file .txt? [y/n] : ");
+                iptstr = sc.nextLine();
+            } while (!iptstr.equals("y") && !iptstr.equals("Y") && !iptstr.equals("n") && !iptstr.equals("N"));
+            if (iptstr.equals("y") || iptstr.equals("Y")) {
+                ReadWriteText.writetxt(strOut + "\n", sc);
+            } else {
+                System.out.println("Hasil tidak ditulis");
+            }
         }
+        
+    }
+    public static void main (String[] args){
+        Matrix m = new Matrix(20, 4);
+        Scanner sc = new Scanner(System.in);
+        m.readMatrix(sc);
+        solve(m, sc);
     }
 }
