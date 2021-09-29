@@ -34,6 +34,10 @@ public class mainpr {
                     doubleLinReg(sc, m);
                     break;
                 case 6:
+                    System.out.println("6 Selected.");
+                    hilbert(sc, m);
+                    break;
+                case 7:
                     System.out.println("Exiting...");
                     exitcode = 1;
                     break;
@@ -49,9 +53,9 @@ public class mainpr {
 
     public static void mainMenu() {
         System.out.println("MENU \n[1] Sistem Persamaan Linier\n[2] Determinan\n[3] Matriks balikan");
-        System.out.println("[4] Interpolasi Polinom\n[5] Regresi linier berganda\n[6] Keluar");
+        System.out.println("[4] Interpolasi Polinom\n[5] Regresi linier berganda\n[6] Matriks Hilbert\n[7] Keluar");
         System.out.println("[0] (Debug) Try Read-Display Matrix");
-        System.out.println("Masukkan pilihan menu (1/2/3/4/5/6/0) : ");
+        System.out.println("Masukkan pilihan menu (1/2/3/4/5/6/7/0) : ");
     }
 
     // TODO: Actual implementation of SPLxx.java for each option bcuz idfk how to
@@ -72,7 +76,7 @@ public class mainpr {
                 switch (ipt1) {
                     case 1:
                         int opt;
-                        System.out.println("\n[1] Masukan Ax = B\n[2] Matriks Augmented\n[3] Matriks Hilbert");
+                        System.out.println("\n[1] Masukan Ax = B\n[2] Matriks Augmented\n");
                         opt = sc.nextInt();
                         switch (opt){ 
                             case 1:
@@ -117,25 +121,6 @@ public class mainpr {
                                 System.out.println("Masukkan matriks: ");
                                 m.readMatrix(sc);
                                 break;
-                            /*
-                            case 3:
-                                System.out.println("3 Selected");
-                                int dimension;
-                                System.out.print("Masukkan dimensi matriks: ");
-                                dimension = sc.nextInt();
-                                m.ROWS = dimension;
-                                m.COLS = dimension;
-                                for(int i = 0; i < dimension; i++){
-                                    for(int j = 0; j < dimension; j++){
-                                        float frac = ((float)1 / (i + j + 1));
-
-                                        m.set(i, j, frac);
-                                    }
-                                }
-                                m.displayMatrix();
-                                InverseOBE.solve(m);
-                                m.displayMatrix();
-                                break; */
                         }
                         break;
                     case 2:
@@ -158,7 +143,7 @@ public class mainpr {
                 switch (ipt1) {
                     case 1:
                         int opt;
-                        System.out.println("\n[1] Masukan Ax = B\n[2] Matriks Augmented\n[3] Matriks Hilbert");
+                        System.out.println("\n[1] Masukan Ax = B\n[2] Matriks Augmented");
                         opt = sc.nextInt();
                         switch (opt){ 
                             case 1:
@@ -202,24 +187,6 @@ public class mainpr {
                                 m.COLS = sc.nextInt();
                                 System.out.println("Masukkan matriks: ");
                                 m.readMatrix(sc);
-                                break;
-                            case 3:
-                                System.out.println("3 Selected");
-                                int dimension;
-                                System.out.print("Masukkan dimensi matriks: ");
-                                dimension = sc.nextInt();
-                                m.ROWS = dimension;
-                                m.COLS = dimension;
-                                for(int i = 0; i < dimension; i++){
-                                    for(int j = 0; j < dimension; j++){
-                                        float frac = ((float)1 / (i + j + 1));
-
-                                        m.set(i, j, frac);
-                                    }
-                                }
-                                m.displayMatrix();
-                                InverseCofactor.solve(m);
-                                m.displayMatrix();
                                 break;
                         }
                         break;
@@ -243,7 +210,7 @@ public class mainpr {
                 switch (ipt1) {
                     case 1:
                         int opt;
-                        System.out.println("\n[1] Masukan Ax = B\n[2] Matriks Augmented\n[3] Matriks Hilbert");
+                        System.out.println("\n[1] Masukan Ax = B\n[2] Matriks Augmented");
                         opt = sc.nextInt();
                         switch (opt){ 
                             case 1:
@@ -287,24 +254,6 @@ public class mainpr {
                                 m.COLS = sc.nextInt();
                                 System.out.println("Masukkan matriks: ");
                                 m.readMatrix(sc);
-                                break;
-                            case 3:
-                                System.out.println("3 Selected");
-                                int dimension;
-                                System.out.print("Masukkan dimensi matriks: ");
-                                dimension = sc.nextInt();
-                                m.ROWS = dimension;
-                                m.COLS = dimension;
-                                for(int i = 0; i < dimension; i++){
-                                    for(int j = 0; j < dimension; j++){
-                                        float frac = ((float)1 / (i + j + 1));
-
-                                        m.set(i, j, frac);
-                                    }
-                                }
-                                m.displayMatrix();
-                                InverseCofactor.solve(m);
-                                m.displayMatrix();
                                 break;
                         }
                         break;
@@ -325,7 +274,7 @@ public class mainpr {
                 switch (ipt1) {
                     case 1:
                         int opt;
-                        System.out.println("\n[1] Masukan Ax = B\n[2] Matriks Augmented\n[3] Matriks Hilbert");
+                        System.out.println("\n[1] Masukan Ax = B\n[2] Matriks Augmented");
                         opt = sc.nextInt();
                         switch (opt){ 
                             case 1:
@@ -369,24 +318,6 @@ public class mainpr {
                                 m.COLS = sc.nextInt();
                                 System.out.println("Masukkan matriks: ");
                                 m.readMatrix(sc);
-                                break;
-                            case 3:
-                                System.out.println("3 Selected");
-                                int dimension;
-                                System.out.print("Masukkan dimensi matriks: ");
-                                dimension = sc.nextInt();
-                                m.ROWS = dimension;
-                                m.COLS = dimension;
-                                for(int i = 0; i < dimension; i++){
-                                    for(int j = 0; j < dimension; j++){
-                                        float frac = ((float)1 / (i + j + 1));
-
-                                        m.set(i, j, frac);
-                                    }
-                                }
-                                m.displayMatrix();
-                                InverseCofactor.solve(m);
-                                m.displayMatrix();
                                 break;
                         }
                         break;
@@ -539,5 +470,30 @@ public class mainpr {
             ipt = sc.nextInt();
         } while (ipt < fOpt || ipt > lOpt);
         return ipt;
+    }
+
+    public static void hilbert(Scanner sc, Matrix m){
+        int dimension;
+        System.out.print("Masukkan dimensi matriks: ");
+        dimension = sc.nextInt();
+        MatrixDouble md = new MatrixDouble(dimension, dimension + 1);
+        for(int i = 0; i < dimension; i++){
+            for(int j = 0; j < dimension; j++){
+                double frac = ((double) 1 / (double)(i + j + 1));
+
+                md.set(i, j, frac);
+            }
+        }
+        for(int i = 0; i < dimension; i++){
+            if(i == 0){
+                md.set(i, dimension, 1);
+            } else {
+                md.set(i, dimension, 0);
+            }
+            
+        }
+        md.displayMatrix();
+        SGJDouble.solve(md);
+        md.displayMatrix();
     }
 }
