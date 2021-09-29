@@ -79,4 +79,19 @@ public class ReadWriteText {
         }
         return matStr;
     }
+    public static String matrixToStrD(MatrixDouble m) {
+        String matStr = "";
+        int i, j;
+        for (i = 0; i < m.ROWS; i++) {
+            for (j = 0; j < m.COLS; j++) {
+                matStr = matStr.concat(Double.toString(m.e(i, j)));
+                if (j != m.COLS - 1) {
+                    matStr = matStr.concat(" ");
+                } else {
+                    matStr = matStr.concat("\n");
+                }
+            }
+        }
+        return matStr;
+    }
 }
