@@ -370,7 +370,6 @@ public class mainpr {
         }
     }
 
-    // TODO: Implementasi matBalik() (Matriks Balikan)
     public static void matBalik(Scanner sc, Matrix m) {
         int input = 0, sta = 0;
         String iptstr = "";
@@ -406,7 +405,7 @@ public class mainpr {
                         iptstr = sc.nextLine();
                     } while (!iptstr.equals("y") && !iptstr.equals("Y") && !iptstr.equals("n") && !iptstr.equals("N"));
                     if (iptstr.equals("y") || iptstr.equals("Y")) {
-                        ReadWriteText.writetxt("Matriks Balikan dari m menggunakan OBE: \n" + ReadWriteText.matrixToStr(m), sc);
+                        ReadWriteText.writetxt("Matriks Balikan dari m menggunakan OBE: \n" + ReadWriteText.matrixToStr(m) + "\n", sc);
                     } else {
                         System.out.println("Hasil tidak ditulis");
                     }
@@ -425,7 +424,7 @@ public class mainpr {
                         iptstr = sc.nextLine();
                     } while (!iptstr.equals("y") && !iptstr.equals("Y") && !iptstr.equals("n") && !iptstr.equals("N"));
                     if (iptstr.equals("y") || iptstr.equals("Y")) {
-                        ReadWriteText.writetxt("Matriks Balikan dari m menggunakan Kofaktor: \n" + ReadWriteText.matrixToStr(m), sc);
+                        ReadWriteText.writetxt("Matriks Balikan dari m menggunakan Kofaktor: \n" + ReadWriteText.matrixToStr(m) + "\n", sc);
                     } else {
                         System.out.println("Hasil tidak ditulis");
                     }
@@ -434,6 +433,7 @@ public class mainpr {
         }
     }
 
+    // TODO: doubleLinReg()
     public static void doubleLinReg(Scanner sc, Matrix m) {
         int input = 0;
         System.out.println("\n REGRESI LINIER BERGANDA");
