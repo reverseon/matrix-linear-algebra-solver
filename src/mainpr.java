@@ -52,7 +52,7 @@ public class mainpr {
     }
 
     public static void mainMenu() {
-        System.out.println("MENU \n[1] Sistem Persamaan Linier\n[2] Determinan\n[3] Matriks balikan");
+        System.out.println("\n\n\nMENU \n[1] Sistem Persamaan Linier\n[2] Determinan\n[3] Matriks balikan");
         System.out.println("[4] Interpolasi Polinom\n[5] Regresi linier berganda\n[6] Matriks Hilbert\n[7] Keluar");
         System.out.println("[0] (Debug) Try Read-Display Matrix");
         System.out.println("Masukkan pilihan menu (1/2/3/4/5/6/7/0) : ");
@@ -492,8 +492,19 @@ public class mainpr {
             }
             
         }
+        System.out.println("\nMatriks Hilbert:");
         md.displayMatrix();
         SGJDouble.solve(md);
-        md.displayMatrix();
+
+        double array[] = new double[dimension];
+
+        System.out.println("\nMelalui sistem penyelesaian Gauss-Jordan, diperoleh solusi: ");
+        for(int i = 0; i < dimension; i++){
+            array[i] = md.e(i, dimension);
+        }
+        for(int i = 0; i < dimension; i++){
+            System.out.print("x" +  i + ": ");
+            System.out.println(array[i]);
+        }
     }
 }
