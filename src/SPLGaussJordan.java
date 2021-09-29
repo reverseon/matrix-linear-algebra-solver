@@ -4,12 +4,10 @@ public class SPLGaussJordan {
         int ldo = 0; /* Jumlah Leading One - 1*/
         int rz = 0; /* JUMLAH ROW ZERO DIBAWAH */
         for (int j = 0; j < m.COLS -1; j++) {
-            System.out.println(ldo);
             if (ldo > m.ROWS-1) break;
             boolean foundone = false;
             for (int i = ldo; i < m.ROWS; i++) {
                 if (Float.compare(1, m.e(i, j)) == 0) {
-                    System.out.println("iwasexec");
                     m.swap(ldo, i);
                     foundone = true;
                     break;
@@ -17,7 +15,6 @@ public class SPLGaussJordan {
             }
             if (foundone == false) {
                 for (int i = ldo; i < m.ROWS; i++) {
-                    System.out.println(ldo + " " + i + " " + "\n");
                     if (Float.compare(0, (m.e(i, j) + 0.0f)) != 0) {
                         m.swap(ldo, i);
                         break;
