@@ -17,7 +17,7 @@ public class InterpolasiPolinom {
             double y = sc.nextDouble();
 
             for(int j = 0; j < size; j++){
-                m.set(i, j, ((double) (Math.round(val * 100.0) / 100.0)));
+                m.set(i, j, val);
                 val = val * x;
             }
             m.set(i, size, y);
@@ -29,13 +29,15 @@ public class InterpolasiPolinom {
         SGJDouble.solve(m);
         m.displayAsEqn();
         
+        double array[] = new double[m.ROWS];
         
-        double array[] = new double[10];
-        
+        for(int i = 0; i < size; i++){
+            array[i] = m.e(i, size);
+        }
 
         System.out.print("\nPersamaan polinom: ");
         for(int i = 0; i < size; i++){
-            array[i] = m.e(i, size);
+            
             System.out.printf("%f", array[i]);
             if(i != 0){
                 System.out.printf("x^%d", i);
@@ -49,15 +51,16 @@ public class InterpolasiPolinom {
             }
             
         }
+
+
         double approx;
         System.out.print("\nMasukkan nilai x yang akan diaproksimasi (input -999 untuk keluar): ");
         approx = sc.nextDouble();
 
         while (approx != -999){
             double result = array[0];
-            System.out.println(result);
             for (int i = 1; i < size; i++){
-                result = result + (Math.pow(approx, i) * array[i]);
+                result = result + (double) (Math.pow(approx, i) * array[i]);
             }
             System.out.printf("Aproksimasi nilai %f terhadap interpolasi polinom: ", approx);
             System.out.println(result);
@@ -65,7 +68,7 @@ public class InterpolasiPolinom {
             System.out.print("\nMasukkan nilai x yang akan diaproksimasi (input -999 untuk keluar): ");
             approx = sc.nextDouble();
         }
-        
+   
     }
 
     public static void main(String[] args){
