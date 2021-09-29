@@ -26,7 +26,6 @@ public class InverseCofactor {
                         }
                     }                
                     
-                    System.out.println("\n");
                     if ((h % 2 == 0 && i % 2 != 0) || (h % 2 != 0 && i % 2 == 0)){
                         cofactorMatrix.set(h, i, -1 * Det.determinanKofaktor(temp));
                     } else{
