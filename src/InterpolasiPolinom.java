@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class InterpolasiPolinom {
     public static void intPol(Scanner sc) {
-        String iptstr = "", strOut = "";
+        String iptstr = "", strOut = "Matriks augmented: \n";
         int size = 0;
 
         System.out.print("Masukkan banyaknya pasangan titik: ");
@@ -23,6 +23,7 @@ public class InterpolasiPolinom {
         }
         System.out.println("\nMatriks augmented persamaan: ");
         m.displayMatrix();
+        strOut = strOut.concat(ReadWriteText.matrixToStrD(m));
         SGJDouble.solve(m);
         m.displayAsEqn();
 
