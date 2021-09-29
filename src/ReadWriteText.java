@@ -79,12 +79,4 @@ public class ReadWriteText {
         }
         return matStr;
     }
-
-    public static void main(String[] args) {
-        String str = "a";
-        Scanner sc = new Scanner(System.in);
-        writetxt(str, sc);
-        str = "b";
-        writetxt(str, sc);
-    }
 }

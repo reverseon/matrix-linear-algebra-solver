@@ -11,7 +11,7 @@ public class mainpr {
             mainMenu();
             Scanner sc = new Scanner(System.in);
             input = -1;
-            input = input(sc, input, 0, 6);
+            input = input(sc, input, 1, 7);
             switch (input) {
                 case 1:
                     System.out.println("1 Selected.");
@@ -41,9 +41,6 @@ public class mainpr {
                     System.out.println("Exiting...");
                     exitcode = 1;
                     break;
-                case 0:
-                    debug(sc);
-                    break;
             }
         }
         if (exitcode == 1) {
@@ -54,8 +51,7 @@ public class mainpr {
     public static void mainMenu() {
         System.out.println("\n\n\nMENU \n[1] Sistem Persamaan Linier\n[2] Determinan\n[3] Matriks balikan");
         System.out.println("[4] Interpolasi Polinom\n[5] Regresi linier berganda\n[6] Matriks Hilbert\n[7] Keluar");
-        System.out.println("[0] (Debug) Try Read-Display Matrix");
-        System.out.println("Masukkan pilihan menu (1/2/3/4/5/6/7/0) : ");
+        System.out.println("Masukkan pilihan menu (1/2/3/4/5/6/7) : ");
     }
 
     // TODO: Actual implementation of SPLxx.java for each option bcuz idfk how to
@@ -457,14 +453,6 @@ public class mainpr {
         DoubleLinReg.solve(m, sc);
     }
 
-    public static void debug(Scanner sc) {
-        Matrix m1 = new Matrix(2, 4);
-        m1.readMatrix(sc);
-        m1.set(1, 3, 12);
-        m1.displayMatrix();
-        System.out.println("");
-    }
-
     public static int input(Scanner sc, int ipt, int fOpt, int lOpt) {
         do {
             ipt = sc.nextInt();
@@ -474,6 +462,7 @@ public class mainpr {
 
     public static void hilbert(Scanner sc, Matrix m){
         int dimension;
+        String iptstr = "", strOut = "";
         System.out.print("Masukkan dimensi matriks: ");
         dimension = sc.nextInt();
         MatrixDouble md = new MatrixDouble(dimension, dimension + 1);
@@ -505,6 +494,21 @@ public class mainpr {
         for(int i = 0; i < dimension; i++){
             System.out.print("x" +  i + ": ");
             System.out.println(array[i]);
+            strOut = strOut.concat("x" + i + ": " + array[i]);
+            if (i != dimension-1) {
+                strOut = strOut.concat(", ");
+            } else {
+                strOut = strOut.concat("\n");
+            }
+        }
+        do {
+            System.out.println("Tulis hasil dalam file .txt? [y/n] : ");
+            iptstr = sc.nextLine();
+        } while (!iptstr.equals("y") && !iptstr.equals("Y") && !iptstr.equals("n") && !iptstr.equals("N"));
+        if (iptstr.equals("y") || iptstr.equals("Y")) {
+            ReadWriteText.writetxt("Melalui sistem penyelesaian Gauss-Jordan, diperoleh solusi: " + strOut, sc);
+        } else {
+            System.out.println("Hasil tidak ditulis");
         }
     }
 }
