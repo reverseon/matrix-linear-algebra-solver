@@ -24,6 +24,9 @@ Program ini dibuat menggunakan:
 * Microsoft Word untuk mengerjakan laporan secara kolaboratif
 
 ### Cara Menjalankan Program
+#### Secara Otomatis
+Jalankan file `RunProgram.bat`. Command Prompt akan mengarahkan langsung untuk menjalankan _bytecode_ program utama.
+
 #### Secara Manual
 1. Pastikan Anda berada di direktori utama (`...\Algeo01-20003`)
 2. Buka Command Prompt, lalu akses folder `bin` (via `cd bin`)
