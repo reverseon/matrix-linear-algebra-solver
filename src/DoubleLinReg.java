@@ -46,6 +46,7 @@ public class DoubleLinReg {
             strOut = strOut.concat("\nSistem persamaan linear yang terbentuk:\n");
             System.out.println("\nSPL yang terbentuk: ");
             String tempStr = " ";
+
             for(int i = 0; i < eq.ROWS; i++){
                 tempStr = "" ;
                 for(int j = 0; j < eq.COLS; j++){
@@ -70,10 +71,31 @@ public class DoubleLinReg {
                 tempStr = tempStr.concat("\n");
                 strOut = strOut.concat(tempStr);
             }
+            System.out.println("\nModel regresi yang terbentuk: ");
+            strOut = strOut.concat("\nModel regresi yang terbentuk: \n");
+            for (int i = 0; i < res.ROWS; i++) {
+
+                System.out.printf("%f", res.e(i, 0));
+                strOut = strOut.concat(Double.toString(res.e(i, 0)));
+                if (i != 0) {
+                    System.out.printf("x%d", i);
+                    strOut = strOut.concat("x" + Integer.toString(i));
+                }
+                if (i + 1 != res.ROWS) {
+                    if (res.e(i + 1, 0) > 0 && i <res.ROWS) {
+                        System.out.print(" + ");
+                        strOut = strOut.concat(" + ");
+                    } else {
+                        System.out.print(" ");
+                        strOut = strOut.concat(" ");
+                    }
+                }
+    
+            }
             String iptstr = "";
             do {
                 iptstr = sc.nextLine();
-                System.out.println("Tulis hasil dalam file .txt? [y/n] : ");
+                System.out.println("\nTulis hasil dalam file .txt? [y/n] : ");
                 iptstr = sc.nextLine();
             } while (!iptstr.equals("y") && !iptstr.equals("Y") && !iptstr.equals("n") && !iptstr.equals("N"));
             if (iptstr.equals("y") || iptstr.equals("Y")) {
@@ -84,10 +106,17 @@ public class DoubleLinReg {
         }
         
     }
-    public static void main (String[] args){
-        Matrix m = new Matrix(20, 4);
-        Scanner sc = new Scanner(System.in);
-        m.readMatrix(sc);
-        solve(m, sc);
+    public static void linReg (Scanner sc){
+        int x;
+        int y;
+        System.out.print("Jumlah pengujian: ");
+        x = sc.nextInt();
+        System.out.print("Jumlah titik x yang hendak diuji: ");
+        y = sc.nextInt();
+        y = y + 1;
+        System.out.println("Masukkan matriks: ");
+        Matrix linRegM = new Matrix(x, y);
+        linRegM.readMatrix(sc);
+        solve(linRegM, sc);
     }
 }
