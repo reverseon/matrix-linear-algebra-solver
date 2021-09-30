@@ -71,11 +71,13 @@ public class Matrix {
         for (int i = 0; i < this.ROWS; i++) {
             boolean fRight = true;
             boolean anyprint = false;
+            boolean anyLeft = false;
             int ldo = -1;
             for (int j = 0; j < this.COLS-1; j++) {
                 if (format(e(i,j)).equals("1.00")) {
                     ldo = j;
                     anyprint = true;
+                    anyLeft = true;
                     System.out.print("x" + (j + 1) + " = ");
                     break;
                 }
@@ -148,7 +150,7 @@ public class Matrix {
                     }
                 }
             }
-            if (oz) {
+            if (oz & anyLeft) {
                 System.out.print("0 ");
             }
             if (anyprint) {
@@ -168,11 +170,13 @@ public class Matrix {
         for (int i = 0; i < this.ROWS; i++) {
             boolean fRight = true;
             boolean anyprint = false;
+            boolean anyLeft = false;
             int ldo = -1;
             for (int j = 0; j < this.COLS-1; j++) {
                 if (format(e(i,j)).equals("1.00")) {
                     ldo = j;
                     anyprint = true;
+                    anyLeft = true;
                     eqnStr = eqnStr.concat("x" + (j + 1) + " = ");
                     break;
                 }
@@ -245,7 +249,7 @@ public class Matrix {
                     }
                 }
             }
-            if (oz) {
+            if (oz & anyLeft) {
                 eqnStr = eqnStr.concat("0 ");
             }
             if (anyprint) {
