@@ -1,5 +1,6 @@
 public class SGJDouble {
     public static int solve(MatrixDouble m) {
+        double EPSILON = 0.0001;
         /* RETURN 1 BILA KONSISTEN, RETURN 0 BILA INKONSISTEN. KONDISI MATRIX TELAH TERATLER! */
         int ldo = 0; /* Jumlah Leading One - 1*/
         int rz = 0; /* JUMLAH ROW ZERO DIBAWAH */
@@ -7,7 +8,7 @@ public class SGJDouble {
             if (ldo > m.ROWS-1) break;
             boolean foundone = false;
             for (int i = ldo; i < m.ROWS; i++) {
-                if (Double.compare(1, m.e(i, j)) == 0) {
+                if (Math.abs(1 - m.e(i,j)) < EPSILON) { 
                     m.swap(ldo, i);
                     foundone = true;
                     break;
@@ -15,13 +16,13 @@ public class SGJDouble {
             }
             if (!foundone) {
                 for (int i = ldo; i < m.ROWS; i++) {
-                    if (Double.compare(0, (m.e(i, j) + 0.0f)) != 0) {
+                    if (!(Math.abs(0 - m.e(i,j)) < EPSILON)) {
                         m.swap(ldo, i);
                         break;
                     }
                 }
             }   
-            if (Double.compare((m.e(ldo, j) + 0.0f), 0) == 0) {
+            if ((Math.abs(0 - m.e(ldo,j)) < EPSILON)) {
                 continue; // KOLOM ITU NOL SEMUA
             } else {
                 double mult = 1/m.e(ldo, j);
@@ -37,12 +38,12 @@ public class SGJDouble {
                     if (i != ldo) {
                         boolean hasnonzero = false;
                         for (int jn = 0; jn < m.COLS-1; jn++) {
-                            if (Double.compare(0, m.e(i, jn)) != 0) {
+                            if (!(Math.abs(0 - m.e(i,jn)) < EPSILON)) {
                                 hasnonzero = true;
                             }
                         }
                         if (!hasnonzero) {
-                            if (Double.compare(0, (m.e(i, m.COLS-1) +0.0f)) != 0) {
+                            if (!(Math.abs(0 - m.e(i, m.COLS-1)) < EPSILON)) {
                                 return 0; /* INKONSISTEN */
                             }  
                             else {

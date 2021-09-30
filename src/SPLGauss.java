@@ -1,5 +1,7 @@
+import java.lang.Math;
 public class SPLGauss {
     public static int solve(Matrix m) {
+        float EPSILON = 0.0001f;
         /* RETURN 1 BILA KONSISTEN, RETURN 0 BILA INKONSISTEN. KONDISI MATRIX TELAH TERATLER! */
         int ldo = 0; /* Jumlah Leading One - 1*/
         int rz = 0; /* JUMLAH ROW ZERO DIBAWAH */
@@ -7,7 +9,7 @@ public class SPLGauss {
             if (ldo > m.ROWS-1) break;
             boolean foundone = false;
             for (int i = ldo; i < m.ROWS; i++) {
-                if (Float.compare(1, m.e(i, j)) == 0) {
+                if ((Math.abs(1 - m.e(i,j)) < EPSILON)) { // (Math.abs(0 - m.e(i,j)) < EPSILON)
                     m.swap(ldo, i);
                     foundone = true;
                     break;
@@ -15,13 +17,13 @@ public class SPLGauss {
             }
             if (!foundone) {
                 for (int i = ldo; i < m.ROWS; i++) {
-                    if (Float.compare(0, (m.e(i, j) + 0.0f)) != 0) {
+                    if (!(Math.abs(0 - m.e(i,j)) < EPSILON)) { // (Math.abs(0 - m.e(i,j)) < EPSILON)
                         m.swap(ldo, i);
                         break;
                     }
                 }
             }   
-            if (Float.compare((m.e(ldo, j) + 0.0f), 0) == 0) {
+            if ((Math.abs(0 - m.e(ldo,j)) < EPSILON)) {
                 continue; // KOLOM ITU NOL SEMUA
             } else {
                 float mult = 1/m.e(ldo, j);
@@ -34,13 +36,13 @@ public class SPLGauss {
                 for (int i = m.ROWS-1-rz; i > ldo; i--) {
                     boolean hasnonzero = false;
                     for (int jn = 0; jn < m.COLS-1; jn++) {
-                        if (Float.compare(0, m.e(i,jn)) != 0) {
+                        if (!(Math.abs(0 - m.e(i,jn)) < EPSILON)) {
                             hasnonzero = true;
                             break;
                         }
                     }
                     if (!hasnonzero) {
-                        if (Float.compare(0, (m.e(i, m.COLS-1) +0.0f)) != 0) {
+                        if (!(Math.abs(0 - m.e(i,m.COLS-1)) < EPSILON)) {
                             return 0;
                         }  
                         else {
