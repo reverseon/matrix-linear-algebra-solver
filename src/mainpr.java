@@ -304,7 +304,7 @@ public class mainpr {
             if (m.ROWS == m.COLS - 1 && Det.determinanKofaktor(m) != 0){
                 Matrix ans = new Matrix(m.ROWS, 1);
                 result = SPLInverse.solve(m, ans);
-                ans.displayMatrix();
+
                 System.out.println("Hasil perhitungan menggunakan metode invers: ");
                 strOut = strOut.concat("\nHasil perhitungan menggunakan metode eliminasi inversn: \n");
                 if (result == 0){
