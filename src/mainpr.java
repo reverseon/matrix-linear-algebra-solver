@@ -1,8 +1,6 @@
 import java.util.Scanner;
 
 public class mainpr {
-    // TODO: Corner cases. Handling more than one action.
-    // TODO: ReadWriteText.writetxt implementations to all options. my head died.
     public static void main(String[] args) {
         int input, exitcode;
         Matrix m = new Matrix(100, 100);
@@ -54,8 +52,6 @@ public class mainpr {
         System.out.println("Masukkan pilihan menu (1/2/3/4/5/6/7) : ");
     }
 
-    // TODO: Actual implementation of SPLxx.java for each option bcuz idfk how to
-    // use it
     public static void splMenu(Scanner sc, Matrix m) {
         int input = 0, ipt1 = 0;
         int result;
@@ -144,7 +140,7 @@ public class mainpr {
 
                 
                 do {
-                    iptstr = sc.nextLine();
+                    
                     System.out.println("Tulis hasil dalam file .txt? [y/n] : ");
                     iptstr = sc.nextLine();
                 } while (!iptstr.equals("y") && !iptstr.equals("Y") && !iptstr.equals("n") && !iptstr.equals("N"));
@@ -231,7 +227,6 @@ public class mainpr {
                 }
 
                 do {
-                    iptstr = sc.nextLine();
                     System.out.println("Tulis hasil dalam file .txt? [y/n] : ");
                     iptstr = sc.nextLine();
                 } while (!iptstr.equals("y") && !iptstr.equals("Y") && !iptstr.equals("n") && !iptstr.equals("N"));
@@ -320,7 +315,6 @@ public class mainpr {
             }
 
             do {
-                iptstr = sc.nextLine();
                 System.out.println("Tulis hasil dalam file .txt? [y/n] : ");
                 iptstr = sc.nextLine();
             } while (!iptstr.equals("y") && !iptstr.equals("Y") && !iptstr.equals("n") && !iptstr.equals("N"));
@@ -405,7 +399,6 @@ public class mainpr {
                     System.out.println("Matriks tidak memenuhi persyaratan.");
                 }
                 do {
-                    iptstr = sc.nextLine();
                     System.out.println("Tulis hasil dalam file .txt? [y/n] : ");
                     iptstr = sc.nextLine();
                 } while (!iptstr.equals("y") && !iptstr.equals("Y") && !iptstr.equals("n") && !iptstr.equals("N"));
@@ -448,7 +441,6 @@ public class mainpr {
         System.out.println("Determinan dengan ekspansi kofaktor adalah " + resKofaktor);
         System.out.println("Determinan dengan reduksi baris adalah " + resGauss);
         do {
-            iptstr = sc.nextLine();
             System.out.println("Tulis hasil dalam file .txt? [y/n] : ");
             iptstr = sc.nextLine();
         } while (!iptstr.equals("y") && !iptstr.equals("Y") && !iptstr.equals("n") && !iptstr.equals("N"));
@@ -524,7 +516,7 @@ public class mainpr {
         }
     }
 
-    // TODO: doubleLinReg()
+
     public static void doubleLinReg(Scanner sc, Matrix m) {
         int input = 0;
         System.out.println("\n REGRESI LINIER BERGANDA");
