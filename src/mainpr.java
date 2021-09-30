@@ -436,19 +436,24 @@ public class mainpr {
                 break;
         }
         strOut = strOut.concat(ReadWriteText.matrixToStr(m) + "\n");
-        resKofaktor = Det.determinanKofaktor(m);
-        resGauss = Det.determinanGaussian(m);
-        System.out.println("Determinan dengan ekspansi kofaktor adalah " + resKofaktor);
-        System.out.println("Determinan dengan reduksi baris adalah " + resGauss);
-        do {
-            System.out.println("Tulis hasil dalam file .txt? [y/n] : ");
-            iptstr = sc.nextLine();
-        } while (!iptstr.equals("y") && !iptstr.equals("Y") && !iptstr.equals("n") && !iptstr.equals("N"));
-        if (iptstr.equals("y") || iptstr.equals("Y")) {
-            ReadWriteText.writetxt(strOut + "Determinan dengan ekspansi kofaktor adalah " + resKofaktor + "\nDeterminan dengan reduksi baris adalah " + resGauss + "\n", sc);
+        if (m.ROWS == m.COLS){
+            resKofaktor = Det.determinanKofaktor(m);
+            resGauss = Det.determinanGaussian(m);
+            System.out.println("Determinan dengan ekspansi kofaktor adalah " + resKofaktor);
+            System.out.println("Determinan dengan reduksi baris adalah " + resGauss);
+            do {
+                System.out.println("Tulis hasil dalam file .txt? [y/n] : ");
+                iptstr = sc.nextLine();
+            } while (!iptstr.equals("y") && !iptstr.equals("Y") && !iptstr.equals("n") && !iptstr.equals("N"));
+            if (iptstr.equals("y") || iptstr.equals("Y")) {
+                ReadWriteText.writetxt(strOut + "Determinan dengan ekspansi kofaktor adalah " + resKofaktor + "\nDeterminan dengan reduksi baris adalah " + resGauss + "\n", sc);
+            } else {
+                System.out.println("Hasil tidak ditulis");
+            }
         } else {
-            System.out.println("Hasil tidak ditulis");
+            System.out.println("Tidak ada determinan.");
         }
+        
     }
 
     public static void matBalik(Scanner sc, Matrix m) {
@@ -469,51 +474,54 @@ public class mainpr {
                 ReadWriteText.readtxt(m, sc);
                 break;
         }
-        input = 0;
-        String strOut = "";
-        strOut = strOut.concat("Matriks input: \n" + ReadWriteText.matrixToStr(m) + "\n");
-        System.out.println("Masukkan pilihan penyelesaian solusi menggunakan [1] OBE | [2] Kofaktor (1/2) : ");
-        input = input(sc, input, 1, 2);
-        switch (input) {
-            case 1:
-                sta = InverseOBE.solve(m);
-                if (sta == 0) {
-                    System.out.println("Matriks inkonsisten.");
-                } else {
-                    System.out.println("Matriks balikan menggunakan OBE: ");
-                    m.displayMatrix();
-                    do {
-                        System.out.println("Tulis hasil dalam file .txt? [y/n] : ");
-                        iptstr = sc.nextLine();
-                        iptstr = sc.nextLine();
-                    } while (!iptstr.equals("y") && !iptstr.equals("Y") && !iptstr.equals("n") && !iptstr.equals("N"));
-                    if (iptstr.equals("y") || iptstr.equals("Y")) {
-                        ReadWriteText.writetxt(strOut + "Matriks Balikan dari m menggunakan OBE: \n" + ReadWriteText.matrixToStr(m) + "\n", sc);
+        if (m.ROWS == m.COLS){
+            input = 0;
+            String strOut = "";
+            strOut = strOut.concat("Matriks input: \n" + ReadWriteText.matrixToStr(m) + "\n");
+            System.out.println("Masukkan pilihan penyelesaian solusi menggunakan [1] OBE | [2] Kofaktor (1/2) : ");
+            input = input(sc, input, 1, 2);
+            switch (input) {
+                case 1:
+                    sta = InverseOBE.solve(m);
+                    if (sta == 0) {
+                        System.out.println("Matriks inkonsisten.");
                     } else {
-                        System.out.println("Hasil tidak ditulis");
+                        System.out.println("Matriks balikan menggunakan OBE: ");
+                        m.displayMatrix();
+                        do {
+                            System.out.println("Tulis hasil dalam file .txt? [y/n] : ");
+                            iptstr = sc.nextLine();
+                            iptstr = sc.nextLine();
+                        } while (!iptstr.equals("y") && !iptstr.equals("Y") && !iptstr.equals("n") && !iptstr.equals("N"));
+                        if (iptstr.equals("y") || iptstr.equals("Y")) {
+                            ReadWriteText.writetxt(strOut + "Matriks Balikan dari m menggunakan OBE: \n" + ReadWriteText.matrixToStr(m) + "\n", sc);
+                        } else {
+                            System.out.println("Hasil tidak ditulis");
+                        }
                     }
-                }
-                break;
-            case 2:
-                sta = InverseCofactor.solve(m);
-                if (sta == 0) {
-                    System.out.println("Matriks inkonsisten.");
-                } else {
-                    System.out.println("Matriks balikan menggunakan Kofaktor: ");
-                    m.displayMatrix();
-                    do {
-                        System.out.println("Tulis hasil dalam file .txt? [y/n] : ");
-                        iptstr = sc.nextLine();
-                        iptstr = sc.nextLine();
-                    } while (!iptstr.equals("y") && !iptstr.equals("Y") && !iptstr.equals("n") && !iptstr.equals("N"));
-                    if (iptstr.equals("y") || iptstr.equals("Y")) {
-                        ReadWriteText.writetxt(strOut + "Matriks Balikan dari m menggunakan Kofaktor: \n" + ReadWriteText.matrixToStr(m) + "\n", sc);
+                    break;
+                case 2:
+                    sta = InverseCofactor.solve(m);
+                    if (sta == 0) {
+                        System.out.println("Matriks inkonsisten.");
                     } else {
-                        System.out.println("Hasil tidak ditulis");
+                        System.out.println("Matriks balikan menggunakan Kofaktor: ");
+                        m.displayMatrix();
+                        do {
+                            System.out.println("Tulis hasil dalam file .txt? [y/n] : ");
+                            iptstr = sc.nextLine();
+                            iptstr = sc.nextLine();
+                        } while (!iptstr.equals("y") && !iptstr.equals("Y") && !iptstr.equals("n") && !iptstr.equals("N"));
+                        if (iptstr.equals("y") || iptstr.equals("Y")) {
+                            ReadWriteText.writetxt(strOut + "Matriks Balikan dari m menggunakan Kofaktor: \n" + ReadWriteText.matrixToStr(m) + "\n", sc);
+                        } else {
+                            System.out.println("Hasil tidak ditulis");
+                        }
                     }
-                }
-                break;
+                    break;
+            }
         }
+        
     }
 
 
