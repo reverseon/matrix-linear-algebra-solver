@@ -1,0 +1,15 @@
+Matriks A: 
+1.0 -1.0 0.0 0.0 1.0
+1.0 1.0 0.0 -3.0 0.0
+2.0 -1.0 0.0 1.0 -1.0
+-1.0 2.0 0.0 -2.0 -1.0
+
+
+ Matriks B: 
+3.0 6.0 5.0 -1.0 
+Hasil perhitungan menggunakan metode eliminasi Gauss-Jordan: 
+
+x1 = 3.00 + t1 
+x2 = 2.00t1 
+x4 = -1.00 + t1 
+0 
