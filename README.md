@@ -25,20 +25,22 @@ Program ini dibuat menggunakan:
 
 ### Cara Menjalankan Program
 #### Secara Otomatis
-Jalankan file `RunProgram.bat`. Command Prompt akan mengarahkan langsung untuk menjalankan _bytecode_ program utama.
+Jalankan file RunProgram.bat. Command Prompt akan mengarahkan langsung untuk menjalankan bytecode program utama.
 
 #### Secara Manual
-1. Pastikan Anda berada di direktori utama (`...\Algeo01-20003`)
-2. Buka Command Prompt, lalu akses folder `bin` (via `cd bin`)
-3. Ketikkan `java mainpr`, lalu program akan berjalan di Command Prompt.
+1. Pastikan Anda berada di direktori utama (...\Algeo01-20003)
+2. Buka direktori src (via cd src) lalu ketikkan javac -d ../bin ./*.java untuk membuat file .class baru
+3. Kembali ke direktor utama (via cd ..)
+4. Buka Command Prompt, lalu akses folder bin (via cd bin)
+5. Ketikkan java mainpr, lalu program akan berjalan di Command Prompt.
 
 #### Memasukkan File sebagai Input 
-1. Buat matriks/input di dalam sebuah file `.txt` yang tersimpan di folder `test`
-2. Pada opsi pemilihan input, pilih opsi 2, lalu masukkan nama file + `.txt` (misal. `input1.txt`).
-3. Apabila tidak ada imbuhan `.txt` pada nama file, program akan terhenti
+1. Buat matriks/input di dalam sebuah file .txt yang tersimpan di folder test
+2. Pada opsi pemilihan input, pilih opsi 2, lalu masukkan nama file + .txt (misal. input1.txt).
+3. Apabila tidak ada imbuhan .txt pada nama file, program akan terhenti
 
 #### Menyimpan File Luaran
 1. Ketika prosedur selesai, akan muncul opsi penyimpanan sebagai file
-2. Ketik `y` untuk menyimpan file, lalu masukkan nama file beserta imbuhan `.txt` (misal. `output1.txt`)
-3. File luaran akan bisa dilihat pada folder `test`
-4. Ketik `n` jika tidak ingin menyimpan file. Anda akan diarahkan kembali ke menu utama
+2. Ketik y untuk menyimpan file, lalu masukkan nama file beserta imbuhan .txt (misal. output1.txt)
+3. File luaran akan bisa dilihat pada folder test
+4. Ketik n jika tidak ingin menyimpan file. Anda akan diarahkan kembali ke menu utama
