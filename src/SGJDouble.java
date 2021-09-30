@@ -1,3 +1,4 @@
+import java.lang.Math;
 public class SGJDouble {
     public static int solve(MatrixDouble m) {
         double EPSILON = 0.0001;
