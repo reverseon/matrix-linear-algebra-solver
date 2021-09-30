@@ -1,3 +1,4 @@
+import java.lang.Math;
 public class SPLGaussJordan {
     public static int solve(Matrix m) {
         float EPSILON = 0.0001f;
