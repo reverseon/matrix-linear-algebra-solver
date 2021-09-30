@@ -1,7 +1,7 @@
 import java.lang.Math;
 public class SGJDouble {
     public static int solve(MatrixDouble m) {
-        double EPSILON = 0.0001;
+        double EPSILON = 0.00000001;
         /* RETURN 1 BILA KONSISTEN, RETURN 0 BILA INKONSISTEN. KONDISI MATRIX TELAH TERATLER! */
         int ldo = 0; /* Jumlah Leading One - 1*/
         int rz = 0; /* JUMLAH ROW ZERO DIBAWAH */
