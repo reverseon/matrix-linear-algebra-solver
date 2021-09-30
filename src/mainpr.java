@@ -140,7 +140,7 @@ public class mainpr {
 
                 
                 do {
-                    
+                    iptstr = sc.nextLine();
                     System.out.println("Tulis hasil dalam file .txt? [y/n] : ");
                     iptstr = sc.nextLine();
                 } while (!iptstr.equals("y") && !iptstr.equals("Y") && !iptstr.equals("n") && !iptstr.equals("N"));
@@ -227,6 +227,7 @@ public class mainpr {
                 }
 
                 do {
+                    iptstr = sc.nextLine();
                     System.out.println("Tulis hasil dalam file .txt? [y/n] : ");
                     iptstr = sc.nextLine();
                 } while (!iptstr.equals("y") && !iptstr.equals("Y") && !iptstr.equals("n") && !iptstr.equals("N"));
@@ -300,21 +301,27 @@ public class mainpr {
                     strOut = strOut.concat("Matriks augmented: \n" + ReadWriteText.matrixToStr(m));
                     break;
             }
-            Matrix ans = new Matrix(m.ROWS, 1);
-            result = SPLInverse.solve(m, ans);
-            ans.displayMatrix();
-            System.out.println("Hasil perhitungan menggunakan metode invers: ");
-            strOut = strOut.concat("\nHasil perhitungan menggunakan metode eliminasi inversn: \n");
-            if (result == 0){
+            if (m.ROWS == m.COLS - 1 && Det.determinanKofaktor(m) != 0){
+                Matrix ans = new Matrix(m.ROWS, 1);
+                result = SPLInverse.solve(m, ans);
                 ans.displayMatrix();
-                System.out.println("Sistem tidak dapat diselesaikan.");
-                strOut = strOut.concat(ReadWriteText.matrixToStr(m) + "\nSistem inkonsisten, tidak ditemukan solusi.");
-            } else {
-                ans.displayAsEqn();
-                strOut = strOut.concat("\n" + ans.returnEqn());
-            }
+                System.out.println("Hasil perhitungan menggunakan metode invers: ");
+                strOut = strOut.concat("\nHasil perhitungan menggunakan metode eliminasi inversn: \n");
+                if (result == 0){
+                    ans.displayMatrix();
+                    System.out.println("Sistem tidak dapat diselesaikan.");
+                    strOut = strOut.concat(ReadWriteText.matrixToStr(m) + "\nSistem inkonsisten, tidak ditemukan solusi.");
+                } else {
+                    ans.displayAsEqn();
+                    strOut = strOut.concat("\n" + ans.returnEqn());
+                }
 
+                
+            } else {
+                System.out.println("Matriks tidak memenuhi persyaratan.");
+            }
             do {
+                iptstr = sc.nextLine();
                 System.out.println("Tulis hasil dalam file .txt? [y/n] : ");
                 iptstr = sc.nextLine();
             } while (!iptstr.equals("y") && !iptstr.equals("Y") && !iptstr.equals("n") && !iptstr.equals("N"));
@@ -399,6 +406,7 @@ public class mainpr {
                     System.out.println("Matriks tidak memenuhi persyaratan.");
                 }
                 do {
+                    iptstr = sc.nextLine();
                     System.out.println("Tulis hasil dalam file .txt? [y/n] : ");
                     iptstr = sc.nextLine();
                 } while (!iptstr.equals("y") && !iptstr.equals("Y") && !iptstr.equals("n") && !iptstr.equals("N"));
@@ -442,6 +450,7 @@ public class mainpr {
             System.out.println("Determinan dengan ekspansi kofaktor adalah " + resKofaktor);
             System.out.println("Determinan dengan reduksi baris adalah " + resGauss);
             do {
+                iptstr = sc.nextLine();
                 System.out.println("Tulis hasil dalam file .txt? [y/n] : ");
                 iptstr = sc.nextLine();
             } while (!iptstr.equals("y") && !iptstr.equals("Y") && !iptstr.equals("n") && !iptstr.equals("N"));
@@ -489,8 +498,8 @@ public class mainpr {
                         System.out.println("Matriks balikan menggunakan OBE: ");
                         m.displayMatrix();
                         do {
-                            System.out.println("Tulis hasil dalam file .txt? [y/n] : ");
                             iptstr = sc.nextLine();
+                            System.out.println("Tulis hasil dalam file .txt? [y/n] : ");
                             iptstr = sc.nextLine();
                         } while (!iptstr.equals("y") && !iptstr.equals("Y") && !iptstr.equals("n") && !iptstr.equals("N"));
                         if (iptstr.equals("y") || iptstr.equals("Y")) {
@@ -508,8 +517,8 @@ public class mainpr {
                         System.out.println("Matriks balikan menggunakan Kofaktor: ");
                         m.displayMatrix();
                         do {
-                            System.out.println("Tulis hasil dalam file .txt? [y/n] : ");
                             iptstr = sc.nextLine();
+                            System.out.println("Tulis hasil dalam file .txt? [y/n] : ");
                             iptstr = sc.nextLine();
                         } while (!iptstr.equals("y") && !iptstr.equals("Y") && !iptstr.equals("n") && !iptstr.equals("N"));
                         if (iptstr.equals("y") || iptstr.equals("Y")) {
@@ -592,6 +601,7 @@ public class mainpr {
             }
         }
         do {
+            iptstr = sc.nextLine();
             System.out.println("Tulis hasil dalam file .txt? [y/n] : ");
             iptstr = sc.nextLine();
         } while (!iptstr.equals("y") && !iptstr.equals("Y") && !iptstr.equals("n") && !iptstr.equals("N"));
