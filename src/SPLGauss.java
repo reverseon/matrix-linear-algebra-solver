@@ -55,7 +55,7 @@ public class SPLGauss {
         int ldoidx = -1;
         for (int i = m.ROWS-1; i >= 0; i--) {
             ldoidx = -1;
-            for (int j = m.COLS-1; j >= 0; j--) {
+            for (int j = m.COLS-2; j >= 0; j--) {
                 if (Matrix.format(m.e(i,j)).equals("1.00")) {
                     ldoidx = j;
                     break;
